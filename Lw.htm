@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerialPort Data</title>
+</head>
+<body>
+<pre>
+아세안 - 베트남 태국,라오스.미얀마.캄보디아
+이곳으로부터의 실시간 데이타를 받아오기 가능한가 ?
+</pre>	
+    <h3>실시간 SerialPort 데이터</h3>
+    <ul id="data-list"></ul>
+
+    <script>
+        const ws = new WebSocket('ws://182.221.61.30:3001'); // 웹소켓 연결
+        const dataList = document.getElementById('data-list');
+
+        ws.onmessage = (message) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = message.data; // 수신된 데이터 추가
+            dataList.appendChild(listItem);
+        };
+    </script>
+<iframe src="https://www.google.com/maps/embed?pb=!4v1744581878952!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ25ncXZCQXc.!2m2!1d34.65050509716607!2d135.3840995059061!3f134.24544754788974!4f-27.54978680219172!5f0.4000000000000002" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</body>
+</html>

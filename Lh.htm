@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Sparkles & Hearts Animation</title>
+  <style>
+    canvas {
+      background: black;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<pre>
+싱가폴,필리핀,인도네시아,말레이시아 ,하와이, 팔라우, 파푸아
+
+</pre>
+
+
+  <canvas id="canvas" width="600" height="400"></canvas>
+
+  <script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    var sparkles = [];
+    var hearts = [];
+
+    // 예시 객체 생성자
+    function Sparkle(x, y) {
+      this.x = x;
+      this.y = y;
+      this.life = 100;
+      this.step = function() {
+        this.y -= 1;
+        this.life--;
+      };
+      this.draw = function() {
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(this.x, this.y, 3, 3);
+      };
+    }
+
+    function Heart(x, y) {
+      this.x = x;
+      this.y = y;
+      this.life = 100;
+      this.step = function() {
+        this.y -= 1;
+        this.life--;
+      };
+      this.draw = function() {
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+      };
+    }
+
+    // 애니메이션 루프
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // sparkles 처리
+      for (var i = sparkles.length - 1; i >= 0; i--) {
+        sparkles[i].step();
+        sparkles[i].draw();
+        if (sparkles[i].life <= 0) {
+          sparkles.splice(i, 1);
+        }
+      }
+
+      // hearts 처리
+      for (var i = hearts.length - 1; i >= 0; i--) {
+        hearts[i].step();
+        hearts[i].draw();
+        if (hearts[i].life <= 0) {
+          hearts.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    // 테스트용 객체 추가
+    setInterval(function() {
+      sparkles.push(new Sparkle(Math.random() * canvas.width, canvas.height));
+      hearts.push(new Heart(Math.random() * canvas.width, canvas.height));
+    }, 500);
+
+    animate();
+  </script>
+</body>
+</html>

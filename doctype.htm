@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>시간 기반 텍스트 구역 예제</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .area { border: 1px solid #ccc; padding: 12px; margin: 8px 0; display: none; }
+    .label { font-weight: bold; margin-bottom: 6px; }
+    .dial { display: inline-flex; gap:8px; margin-top:8px; }
+    .dial button { padding: 8px 12px; border-radius: 20px; border:1px solid #888; background:#f0f0f0; cursor:pointer; }
+    #bottom-unassigned { margin-top:20px; border-top:1px dashed #aaa; padding-top:12px; display:none; }
+  </style>
+</head>
+<body>
+
+  <h2>시간 기반 텍스트 구역</h2>
+
+  <!-- A, B, C 명칭을 가진 구역 -->
+  <div id="areaA" class="area">
+    <div class="label">A</div>
+    <div>여기에 A 텍스트 내용을 넣으세요.</div>
+  </div>
+
+  <div id="areaB" class="area">
+    <div class="label">B</div>
+    <div>여기에 B 텍스트 내용을 넣으세요.</div>
+  </div>
+
+  <div id="areaC" class="area">
+    <div class="label">C</div>
+    <div>여기에 C 텍스트 내용을 넣으세요.</div>
+  </div>
+
+  <!-- 나머지 텍스트 구역 (다이얼 버튼으로 B/C 표시 가능) -->
+  <div id="areaD" class="area" style="display:block;">
+    <div class="label">다이얼 구역 (D)</div>
+    <div>이 영역을 다이얼 버튼으로 사용합니다. 아래 버튼을 눌러 B 또는 C를 표시하세요.</div>
+    <div class="dial">
+      <button id="showB">B 표시</button>
+      <button id="showC">C 표시</button>
+    </div>
+  </div>
+
+  <!-- 14일,16일에 할당 안된 구역들을 동시에 하단에 표시 -->
+  <div id="bottom-unassigned"></div>
+
+<script>
+(function(){
+  const areaA = document.getElementById('areaA');
+  const areaB = document.getElementById('areaB');
+  const areaC = document.getElementById('areaC');
+  const areaD = document.getElementById('areaD'); // 다이얼 영역 (항상 보이도록 설정 가능)
+  const bottom = document.getElementById('bottom-unassigned');
+
+  // 현재 로컬 시간 읽기
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const day = now.getDate();
+
+  // 헬퍼: 시:분 비교 (예: isBefore(7,30) => true면 07:30 이전)
+  function isBefore(h, m) {
+    if (hours < h) return true;
+    if (hours > h) return false;
+    return minutes < m;
+  }
+
+  // 우선순위: 07:30 이전 => C, 07:30~12:00 => A, 12:00~21:30 => B
+  if (isBefore(7,30)) {
+    areaC.style.display = 'block';
+  } else if (isBefore(12,0)) {
+    areaA.style.display = 'block';
+  } else if (isBefore(21,30)) {
+    areaB.style.display = 'block';
+  } else {
+    // 21:30 이후에는 A/B/C 모두 보이지 않음 (필요 시 여기서 처리)
+  }
+
+  // 다이얼 버튼 동작: D에서 B 또는 C 표시
+  document.getElementById('showB').addEventListener('click', function(){
+    hideAllABC();
+    areaB.style.display = 'block';
+    maybeScrollTo(areaB);
+  });
+  document.getElementById('showC').addEventListener('click', function(){
+    hideAllABC();
+    areaC.style.display = 'block';
+    maybeScrollTo(areaC);
+  });
+
+  function hideAllABC() {
+    areaA.style.display = 'none';
+    areaB.style.display = 'none';
+    areaC.style.display = 'none';
+  }
+  function maybeScrollTo(el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // 오늘이 14일 또는 16일이면, 현재 보이지 않는(=할당 안된) 텍스트 구역을 하단에 동시에 표시
+  if (day === 14 || day === 16) {
+    // 어떤 구역이 "할당 안된" 상태인지 판단: A/B/C 중 display === 'none' 인 것들을 복사해 하단에 표시
+    const unassigned = [];
+    [areaA, areaB, areaC].forEach(function(a){
+      if (getComputedStyle(a).display === 'none') {
+        // 내용을 복사해서 하단에 추가
+        const clone = a.cloneNode(true);
+        // id 충돌 방지
+        clone.id = '';
+        clone.style.display = 'block';
+        unassigned.push(clone);
+      }
+    });
+    if (unassigned.length) {
+      bottom.style.display = 'block';
+      bottom.innerHTML = '<strong>14일/16일 특수 표시: 할당 안된 구역들</strong>';
+      unassigned.forEach(function(clone){
+        bottom.appendChild(clone);
+      });
+      // 하단으로 스크롤 시원하게
+      bottom.scrollIntoView({behavior:'smooth', block:'end'});
+    }
+  }
+
+})();
+</script>
+
+</body>
+</html>

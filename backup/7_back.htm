@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>버튼 클릭 시 텍스트 표시 (7개)</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      vertical-align: top;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      display: block;
+      margin: 5px 0;
+      width: 100px;
+    }
+    p {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px 0;
+    }
+    pre{
+	    background-color:#f0f0f0;
+	    padding:5px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <!-- 좌측 버튼 영역 -->
+      <td>
+        <button onclick="showText(1)">버튼 1</button>
+        <button onclick="showText(2)">버튼 2</button>
+        <button onclick="showText(3)">버튼 3</button>
+        <button onclick="showText(4)">버튼 4</button>
+        <button onclick="showText(5)">버튼 5</button>
+        <button onclick="showText(6)">버튼 6</button>
+        <button onclick="showText(7)">버튼 7</button>
+      </td>
+
+      <!-- 우측 텍스트 영역 -->
+      <td>
+        <p id="text1">버튼 1을 눌렀을 때 보이는 텍스트입니다.
+<pre>	
+<video src="snow.mp4" muted autoplay playsinline loop></video>
+</pre>	
+</p>
+        <p id="text2">
+<video
+height="200" width="200" controls="" loop="2"   preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="http://182.221.61.30/see1.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+버튼 2를 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text3">
+<audio src="http://182.221.61.30/mee.mp3" controls="" >
+버튼 3을 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text4">버튼 4를 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text5">버튼 5를 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text6">버튼 6을 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text7">버튼 7을 눌렀을 때 보이는 텍스트입니다.</p>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 7; i++) {
+        document.getElementById("text" + i).style.display = "none";
+      }
+      // 선택한 텍스트만 보이기
+      document.getElementById("text" + num).style.display = "block";
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>13t page</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      width:50px;
+      vertical-align: top;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      display: block;
+      margin: 5px 0;
+      width: 100px;
+      padding: 5px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button.active {
+      background-color: #4CAF50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    .text-block {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px 0;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <!-- 좌측 버튼 영역 -->
+      <td>
+        <button onclick="showText(1)">合</button>
+        <button onclick="showText(2)">禁</button>
+        <button onclick="showText(3)">祝</button>
+        <button onclick="showText(4)">割</button>
+        <button onclick="showText(5)">空</button>
+        <button onclick="showText(6)">有</button><hr>
+        <button onclick="showText(7)">申</button>
+        <button onclick="showText(8)">秘</button>
+        <button onclick="showText(9)">得</button>
+        <button onclick="showText(10)">營</button>
+        <button onclick="showText(11)">無</button>
+        <button onclick="showText(12)">月</button><hr>
+        <button onclick="showText(13)">滿</button>
+      </td>
+
+      <!-- 우측 텍스트 영역 -->
+      <td>
+        <div id="text1" class="text-block"><pre>
+지금의 행위가 1목후에 평가된다 그러니까  신중에 신중으로 
+合에 관련된
+23-11:세성관측
+---------------------------
+12시 행 (25)
+중동 오도바이 사고후
+-----------------
+1시행 (26)
+사고 무사:치유되고 회복된안정(어깨부터) 죽음의 표현들.숨.죽.딴세상
+말자리 
+1시행: 모든 시작과 숨결까지 1시부터 시작되는거임
+
+
+
+
+</pre></div>
+
+
+        <div id="text2" class="text-block">
+<pre>
+
+합에서 1칸 벌어진. 합치의 의미는 ? 그것에 처음 벌어진
+禁:자학을 금하고 섣부른 행동을 금하고,쓸데없는말 말고
+
+23-12월; 브채 투입;
+----------------
+1(25) .어깨의 다른 진단.케젠. 노트북 기능 으로 서버구축
+--------------------------------------
+2(26)비판의 끝판왕.사회적.개인적(마구들 탐구)
+본결 겸손케 됨(새술은 새부대에-성경구절)
+
+
+</pre></div>
+        <div id="text3" class="text-block"><pre>祝		 <h3>학벌사회 </h3>
+祝:24-1
+/25-2
+급여주.합치주 상징물 준비
+f-link 남부 시장 톰 문자 향방 확실
+
+/26/3=14-3월/통신대 입학.근입재단 구상,큰tv./F:서신가구/E:에스텍 입사
+-----------------------------------------------------------------------
+
+
+ 관련 텍스트...</pre></div>
+        <div id="text4" class="text-block"><pre>割 관련 텍스트...</pre></div>
+        <div id="text5" class="text-block"><pre>空 관련 텍스트...</pre></div>
+        <div id="text6" class="text-block"><pre>有 관련 텍스트...</pre></div>
+        <div id="text7" class="text-block"><pre>申 관련 텍스트...</pre></div>
+        <div id="text8" class="text-block"><pre>秘 관련 텍스트...</pre></div>
+        <div id="text9" class="text-block"><pre>得 관련 텍스트...</pre></div>
+        <div id="text10" class="text-block"><pre>營 관련 텍스트...</pre></div>
+        <div id="text11" class="text-block"><pre>無 관련 텍스트...</pre></div>
+        <div id="text12" class="text-block"><pre>月 관련 텍스트...</pre></div>
+        <div id="text13" class="text-block"><pre>滿 관련 텍스트...</pre></div>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 13; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+  </script>
+</body>
+</html>

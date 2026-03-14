@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>hy page - man from view of star </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      vertical-align: top;
+      padding: 10px;
+    }
+    /* 버튼 스타일 */
+    button {
+      display: block;
+      margin: 8px 0;
+      width: 120px;
+      padding: 8px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button.active {
+      background-color: #4CAF50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    /* 텍스트 블록 */
+    .text-block {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fafafa;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #999;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <!-- 좌측 내용 영역 -->
+      <td style="width:70%;">
+        <div id="text1" class="text-block"><p>
+우주적 인간 <br>
+
+<video width="300" heigth="200" autoplay muted controls loop> 
+<source  src="station.mp4" type="video/mp4"> 
+</video>
+<img src="tenha.jpg" width="300" heigth="200">
+인류출현 300 만년전ㅡ불사용 142만 년전 .호모사피엔스 4만년전
+<p>12간중 몃초에불과한 역기록사
+
+</p></div>
+        <div id="text2" class="text-block"><p>두 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text3" class="text-block"><p>세 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text4" class="text-block"><p>네 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text5" class="text-block"><p>다섯 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text6" class="text-block"><p>여섯 번째 버튼에 해당하는 내용입니다.</p></div>
+      </td>
+
+      <!-- 중간 구분선 -->
+      <td style="width:5%; text-align:center;">
+        <hr style="height:100%; border-left:2px solid #999;">
+      </td>
+
+      <!-- 우측 버튼 영역 -->
+      <td style="width:25%;">
+        <button onclick="showText(1)"> N  </button>
+        <button onclick="showText(2)"> T   </button>
+        <button onclick="showText(3)"> F   </button>
+        <button onclick="showText(4)"> E   </button>
+        <button onclick="showText(5)"> W  </button>
+        <button onclick="showText(6)"> H   </button>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 6; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+--------------------
+

@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Button Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding:18px;
+    }
+    /* 버튼 영역 */
+    .button-bar {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid #999; /* 구분선 */
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .button-bar button {
+      margin: 0 8px;
+      padding: 8px 16px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .button-bar button.active {
+      background-color: #4CAF50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    /* 내용 영역 */
+    .text-block {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px auto;
+      max-width: 800px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+	<pre>
+   solra system and  5 small balls <br>
+
+        </pre>
+  <!-- 상단 버튼 영역 -->
+  <div class="button-bar">
+    <button onclick="showText(1)">N</button>
+    <button onclick="showText(2)">T</button>
+    <button onclick="showText(3)">F</button>
+    <button onclick="showText(4)">E</button>
+    <button onclick="showText(5)">W</button>
+    <button onclick="showText(6)">H</button>
+  </div>
+
+  <!-- 내용 영역 -->
+<div id="text1" class="text-block"><p>
+
+<table>
+<td>
+<img height="200" width="200" src="./l23jupi.gif">
+</td>
+<td>
+<video
+height="200" width="200" controls="" muted autoplay  loop  preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="./1234.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+</td>
+
+<td>
+<video
+height="200" width="200" controls=""     preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="./ree2.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+</td>
+<td>
+</td>
+	1 번째 버튼에 해당하는 내용입니다.
+</table>
+
+<pre>
+
+
+</pre>
+</p></div>
+
+
+<div id="text2" class="text-block"><p>
+	두 번째 버튼에 해당하는 내용입니다.
+	
+	</p></div>
+
+
+<div id="text3" class="text-block"><p>
+	세 번째 버튼에 해당하는 내용입니다.
+	
+	</p></div>
+
+
+<div id="text4" class="text-block"><p>
+	네 번째 버튼에 해당하는 내용입니다.
+	
+	</p></div>
+
+
+<div id="text5" class="text-block"><p>
+	다섯 번째 버튼에 해당하는 내용입니다.
+	
+	</p></div>
+
+
+<div id="text6" class="text-block"><p>
+	여섯 번째 버튼에 해당하는 내용입니다.
+	
+	</p></div>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 6; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll(".button-bar button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+
+    // 페이지 로딩 시 첫 번째 버튼과 내용 표시
+    window.onload = function() {
+      const firstButton = document.querySelector(".button-bar button");
+      if (firstButton) {
+        firstButton.classList.add("active");
+      }
+      const firstBlock = document.getElementById("text1");
+      if (firstBlock) {
+        firstBlock.style.display = "block";
+      }
+    };
+  </script>
+<p id="content">
+<div class="jday">
+E_W_H 의 시간 .2task.22 퇴근 . 출고 제대로 . 다음. 
+<pre>
+-------------W -----------  영역 i
+위로 항야는 나의 근무 형태 즉 오후 근무
+한달새 예상 되는 페이지는  20여개 예상
+W의 기능은 오후 근무시에는 위로 향하는 것임.
+13work mission = ? little bit 
+like puzzle 
+make: show.html. input month and 3 display
+good feel: mac,walk,bab.tom 
+
+my  first go  out  people  i love  them
+<br>e  live  astro area
+
+-------  t  time 
+<div class="leftbox">
+n:with sonpuy
+left box text
+n:with sounpuy perfect time round
+close win. airplan:serch
+</div>
+------ f  
+----- e   oure sun 
+
+
+</pre>
+
+</body>
+</html>
+
+
+
+
+
+
+<!-- 
+
+-------------------------------------
+<html>
+<head>
+<meta charset='utf-8'>
+<title>yn page</title>
+meta http-equiv='refresh' content='500'/>
+<script  src="./jpg.js"></script> 
+<link rel="stylesheet" href='../me.css' />
+<scrip>
+var mpl = "../see4.mp4"; // 동영상 파일 경로
+var pgl = "../tom.jpg";  // 이미지 파일 경로
+var mps = ["../wU/snow.mp4", "../wU/power.mp4"]; // 여러 동영상 파일 경로 배열
+const that = 50; // 상수 값
+
+// HTML을 동적으로 생성하여 이미지 표시
+x-document.write(`<img src="${pgl}">`);
+</script>
+</head>
+<body>
+
+
+<script>
+daysak();
+</script>
+<!--
+my  first go  out  people  i love  them
+<img src="./tenha.jpg>
+</div>
+<table>
+<td>
+script>
+var suko=("nose" ,"ear","head","mouth","knee","foot","hand");
+var mpl="../see4.mp4";
+var pgl="../tom.jpg";
+var mps=("../wU/snow.mp4","../wU/power.mp4");
+const that=50;
+<img src="${pgl}">
+<img src=${pgl}>
+<video
+height="200" width="200" controls=""    preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="../see4.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+normal
+<br></td>
+<td>
+<video
+height="200" width="200" controls=""    preload="bbb"
+srclang="ko" label="korean" default="">
+<source src=${mps[1]} type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+<br></td> mps play
+<td>
+<video
+height="200" width="200" controls=""    preload="bbb"
+srclang="ko" label="korean" default="">
+<source src=${mpl}  type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>mpl play
+<br></td>
+<td>
+<video
+height="200" width="200" controls=""    preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="${mpl}"  type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+<br></td>
+</table>
+fixed  by AI 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Media Example</title>
+</head>
+<body>
+-->
+<div id="content"></div>
+
+<script>
+  // Correct array declarations
+  var suko = ["nose", "ear", "head", "mouth", "knee", "foot", "hand"];
+  var mpl = "./see4.mp4";
+  var pgl = "./tom.jpg";
+  var mps = ["./snow.mp4", "./power.mp4"];
+  const that = 50;
+
+  // Reference to container div
+  var contentDiv = document.getElementById('content');
+
+  // Create and append image elements
+  var img1 = document.createElement('img');
+  img1.src = pgl;
+  img1.style.width = '300px';
+img1.style.height = 'auto';
+  contentDiv.appendChild(img1);
+
+// var img2 = document.createElement('img');
+//  img2.src = pgl;
+//  img1.style.width = '400px';
+// img1.style.height = 'auto';
+//  contentDiv.appendChild(img2);
+
+  // Create and append first video element
+  var video1 = document.createElement('video');
+  video1.height = 200;
+  video1.width = 200;
+  video1.controls = true;
+  video1.preload = "auto";
+
+  var source1 = document.createElement('source');
+  source1.src = mpl;
+  source1.type = "video/mp4";
+  video1.appendChild(source1);
+
+  var fallback1 = document.createElement('p');
+  fallback1.textContent = "이 브라우저는 video를 재생할 수 없습니다.";
+  video1.appendChild(fallback1);
+
+  contentDiv.appendChild(video1);
+
+  // Create and append second video element
+  var video2 = document.createElement('video');
+  video2.height = 200;
+  video2.width = 200;
+  video2.controls = true;
+  video2.preload = "auto";
+
+  var source2 = document.createElement('source');
+  source2.src = mps[0]; // second video source
+  source2.type = "video/mp4";
+  video2.appendChild(source2);
+
+  var fallback2 = document.createElement('p');
+  fallback2.textContent = "이 브라우저는 video를 재생할 수 없습니다.";
+  video2.appendChild(fallback2);
+
+  contentDiv.appendChild(video2);
+
+  // You can also log or use the suko array and 'that' constant as needed
+  console.log("Body parts array:", suko);
+  console.log("Constant that:", that);
+</script>
+
+
+-->
+
+
+<a href="https://docs.google.com/spreadsheets/d/1nV0G8ax4-Zfnq6w1EIh-TCd4DrITIZdBz5QuH9TpUR0/edit?gid=1998481869#gid=1998481869" target="_blank">13sheet</a>
+</pgg</body>
+</html>

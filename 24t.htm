@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>구역별 오픈 관리 (날짜 조건 추가)</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; text-align: center; }
+        .btn-group { margin-bottom: 20px; }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+        button.active {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        .content-area {
+            border: 2px solid #ddd;
+            padding: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            min-height: 100px;
+            margin-bottom: 20px;
+        }
+        /* D 텍스트 스타일 */
+        #special-d {
+            display: none; /* 기본은 숨김 */
+            padding: 15px;
+            background-color: #fff3cd;
+            border: 1px dashed #ffeeba;
+            color: #856404;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .time-info { color: #666; margin-bottom: 10px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <h2>구역별 오픈 시스템</h2>
+    <p class="time-info" id="currentDateTime"></p>
+
+    <div class="btn-group">
+        <button id="btn-a" onclick="showArea('A')">A 구역</button>
+        <button id="btn-b" onclick="showArea('B')">B 구역</button>
+        <button id="btn-c" onclick="showArea('C')">C 구역</button>
+    </div>
+
+    <div id="display-panel" class="content-area">
+        데이터를 불러오는 중...
+    </div>
+
+    <div id="special-d">
+        📢 오늘은 14일/16일 특별 점검일입니다: D 구역 텍스트 활성화
+    </div>
+
+    <script>
+        function showArea(areaId) {
+            // 모든 버튼 초기화
+            document.querySelectorAll('.btn-group button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 선택 버튼 활성화
+            const targetBtn = document.getElementById('btn-' + areaId.toLowerCase());
+            if(targetBtn) targetBtn.classList.add('active');
+
+            // 내용 교체 (클리어 후 보여주기)
+            const panel = document.getElementById('display-panel');
+            panel.innerText = areaId + " 구역 내용이 출력됩니다.";
+        }
+
+        function init() {
+            const now = new Date();
+            const date = now.getDate(); // 날짜 (일)
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const totalMinutes = (hours * 60) + minutes;
+
+            // 상단 시간 정보 업데이트
+            document.getElementById('currentDateTime').innerText = 
+                `현재 날짜: ${date}일 / 시각: ${hours}시 ${minutes}분`;
+
+            // 1. 날짜 조건 체크 (14일 혹은 16일일 때만 D 텍스트 노출)
+            if (date === 14 || date === 16) {
+                document.getElementById('special-d').style.display = 'block';
+            }
+
+            // 2. 시간 조건 체크 (12시 이전 기준)
+            if (totalMinutes < 12 * 60) {
+                if (totalMinutes < (7 * 60 + 30)) {
+                    showArea('B'); // 7:30 전이면 B
+                } else if (totalMinutes < (9 * 60 + 30)) {
+                    showArea('A'); // 9:30 전이면 A
+                } else {
+                    showArea('C'); // 그 외 12시 전까지 C (디폴트)
+                }
+            } else {
+                document.getElementById('display-panel').innerText = "오전 오픈 세션 종료 (12시 이후)";
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

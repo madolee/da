@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>13t page</title>
+  <style>
+ .day-box {
+      display: none; /* hide first  */
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      width:50px;
+      vertical-align: top;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      display: block;
+      margin: 5px 0;
+      width: 100px;
+      padding: 5px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button.active {
+      background-color: #4CAF50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    .text-block {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px 0;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+ <h4>text of the day</h4>
+
+  <!-- 7 text area -->
+  <div id="sun" class="day-box">日  make rule</div>
+ 
+  <div id="mon" class="day-box">月  mam tree</div>
+
+  <div id="tue" class="day-box">火  hanja </div>
+
+  <div id="wed" class="day-box">水  this is my way</div>
+
+  <div id="thu" class="day-box">木  bring to me jupiter</div>
+
+  <div id="fri" class="day-box">金  make empty mind</div>
+
+  <div id="sat" class="day-box">土  sat:prepare future</div>
+   <script>
+    // bring day code 
+    const today = new Date();
+    const dayOfWeek = today.getDay(); 
+    // getDay() → 0(일요일) ~ 6(토요일)
+
+    // 요일 ID 매핑
+    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+    //  display today  
+    const todayBox = document.getElementById(days[dayOfWeek]);
+    if (todayBox) {
+      todayBox.style.display = "block";
+    }
+  </script>
+
+
+
+  <table>
+    <tr>
+      <!-- 좌측 버튼 영역  營空 割有-->
+      <td>
+        <button onclick="showText(1)">合</button>
+        <button onclick="showText(2)">禁</button>
+        <button onclick="showText(3)">空</button>
+        <button onclick="showText(4)">無 90+ </button>
+        <button onclick="showText(5)">得</button>
+        <button onclick="showText(6)"> not </button><hr>
+        <button onclick="showText(7)">申  180+ </button>
+        <button onclick="showText(8)">秘</button>
+        <button onclick="showText(9)"> not  </button>
+        <button onclick="showText(10)">祝  270+ </button>
+        <button onclick="showText(11)">有</button>
+        <button onclick="showText(12)">月 </button><hr>
+        <button onclick="showText(13)">滿 </button>
+      </td>
+
+      <!-- 우측 텍스트 영역 -->
+      <td>
+        <div id="text1" class="text-block"><pre>
+지금의 행위가 1목후에 평가된다 그러니까  신중에 신중으로 
+合에 관련된
+23-11:세성관측
+---------------------------
+12시 행 (25)
+중동 오도바이 사고후
+-----------------
+1시행 (26)
+사고 무사:치유되고 회복된안정(어깨부터) 죽음의 표현들.숨.죽.딴세상
+말자리 
+1시행: 모든 시작과 숨결까지 1시부터 시작되는거임
+
+
+
+
+</pre></div>
+
+
+        <div id="text2" class="text-block">
+<pre>
+
+합에서 1칸 벌어진. 합치의 의미는 ? 그것에 처음 벌어진
+禁:자학을 금하고 섣부른 행동을 금하고,쓸데없는말 말고
+
+23-12월; 브채 투입;
+----------------
+1(25) .어깨의 다른 진단.케젠. 노트북 기능 으로 서버구축
+--------------------------------------
+2(26)비판의 끝판왕.사회적.개인적(마구들 탐구)
+본결 겸손케 됨(새술은 새부대에-성경구절)
+
+
+</pre></div>
+        <div id="text3" class="text-block"><pre>祝		 <h3>학벌사회 </h3>
+祝:24-1
+/25-2
+급여주.합치주 상징물 준비
+f-link 남부 시장 톰 문자 향방 확실
+
+/26/3=14-3월/통신대 입학.근입재단 구상,큰tv./F:서신가구/E:에스텍 입사
+-----------------------------------------------------------------------
+
+
+ 관련 텍스트...</pre></div>
+        <div id="text4" class="text-block"><pre>
+割
+눈에서도 멀저지니 서서히 반대편으로 들어서는 초입.
+그간 같이 있어 우러러 보면 볼수 있었던 그것은 지금은 볼수 없으니
+다음의 볼날을 기약 해야 하고 정 반대 180각을 향해 출발 해야 겟지
+
+		관련 텍스트...</pre></div>
+        <div id="text5" class="text-block"><pre>空 관련 텍스트...</pre></div>
+        <div id="text6" class="text-block"><pre>有 관련 텍스트...</pre></div>
+        <div id="text7" class="text-block"><pre>
+申 관련 텍스트...
+완전한 건너편에서 바라다 보이는 것이리라
+그간 같은 하늘을 공유햇을때의 즐거움이 사라지고  눈에서도 멀어진지 90각이 지낫고
+어찌됫던  다시 눈에 보일 가능성이 있도록 90각을 지내야 하는 어두움의 시간들을 살게되네	
+	
+	</pre></div>
+
+
+
+
+        <div id="text8" class="text-block"><pre>秘 관련 텍스트...</pre></div>
+        <div id="text9" class="text-block"><pre>得 관련 텍스트...</pre></div>
+        <div id="text10" class="text-block"><pre>
+
+營 
+이제는 볼수 있을거다. 조금만 더 지나면 그간 찾아도 볼수 없엇던 환한 미소가
+보이겟지  2번의 구십각을 잘도 참았구나  이번에는 어느 하늘에서 달님과 같이 
+만날수 있으려나- 나를 잡아주는 이여
+관련 텍스트...</pre></div>
+        <div id="text11" class="text-block"><pre>無 관련 텍스트...</pre></div>
+        <div id="text12" class="text-block"><pre>月 관련 텍스트...</pre></div>
+        <div id="text13" class="text-block"><pre>
+
+滿
+새로움이란 무엇일까 ?
+하나의 돌기를 마치고 마지막 남은 움직임속에 
+새로운 하늘이 기다리고 있을것이고
+새로운 감정들로 채워질 합치와 새로운 출발을 기다린다	       
+	관련 텍스트...</pre></div>
+      </td>
+    </tr>
+  </table>
+<pre>
+<h4>fr-T,  fr-F  fr-E  fr-W  fr-H</h4>
+------------------------------
+fr-N  80-00
+remember that time???
+before seoul  space 
+work mado,suwon,osan,ansan 
+sole 
+-----------------------
+fr-T    00-20
+but not willing  i have to live in seoul
+feel free but not happy time
+
+------------------------------
+fr-F   20-40
+plan?  make  for E W H 
+this match to 48 extened T F E W turn 
+mix two and make  powerful  plan  and make reality
+
+------------------------------
+fr-E   40- 60
+buy  AI related  robot to care for ME house Happy . body
+
+-------------------------------
+fr-W   60-80
+space travle 
+
+--------------------------------
+fr-H   80-100
+exist ?
+
+--------------------------------
+</pre>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 13; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+  </script>
+</body>
+</html>

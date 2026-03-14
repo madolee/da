@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>48t page </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      vertical-align: top;
+      padding: 10px;
+    }
+    /* 버튼 스타일 */
+    button {
+      display: block;
+      margin: 8px 0;
+      width: 120px;
+      padding: 8px;
+      border: 1px solid #333;
+      background-color: #e0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button.active {
+      background-color: #2CAa50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    /* 텍스트 블록 */
+    .text-block {
+      display: none; /* 기본적으로 */
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fafafa;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #999;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+<p style="text-align: center;"> 48t - J_worktype _page .</p>
+  <table>
+    <tr>
+      <!-- 좌측 내용 영역 -->
+      <td style="width:70%;">
+	      <pre>
+        <div id="text1" class="text-block"><p>
+[  before of beath of my life ~1965 ]  J_work type
+network,communication, try to overcome war, not open world, 
+n:절:
+t:
+f:절:재정,가치 보관방법,송금,은행,증권,채권,급여,코인(n턴때의)
+e:
+w:
+h:
+
+<hr>
+<br>
+[  after death of my life 2070~   ]
+추후 구매 사항: 가정로봇,법률ai. 자문.연구ai
+(분야별케어:간병겸,요리겸,코디겸,비서겸,수행겸,레슨겸)
+학습데이타:덕,리,수박.톰
+여행: 우주여행,유전자 맟춤 장기 제작 의뢰
+남자들:수산,눼임.만득,용스,
+
+robot?, human life perid, world map, mankind, langue, space life ?, 
+
+</p></div>
+        <div id="text2" class="text-block"><p>
+1977year turn: according to 2025 t
+땅묻의 턴, 다시 상기해봐서 생김.
+network,communication, try to overcome war, not open world, 
+n:절:
+t:
+f:절:재정,가치 보관방법,송금,은행,증권,채권,급여,코인(n턴때의)
+증권거래소:56설립:관리기관 : 금융위원회
+주요주주:kb증권등 금융투자회사 86%
+한국은행(설립 50년 6월) -해방후 은행 보유금괴 1톤.차량으로 대전 부산에 도착함
+궤짝48(보물과 함께) 미국으로 이송됨
+북한이 은행을 장악함으로 화폐개혁 단행
+
+e:
+w:
+h:
+
+-------present now a day
+
+
+
+
+.</p></div>
+        <div id="text3" class="text-block"><p>
+1989year turn: according to 2037 f
+network,communication, try to overcome war, not open world, 
+n:절:
+t:
+f:절:재정,가치 보관방법,송금,은행,증권,채권,급여,코인(n턴때의)
+e:
+w:
+h:
+
+--------------------확장 w턴 (38)
+
+</p></div>
+        <div id="text4" class="text-block"><p>
+
+2001year turn: according to 2050 e
+
+network,communication, try to overcome war, not open world, 
+n:절:
+t:
+f:절:재정,가치 보관방법,송금,은행,증권,채권,급여,코인(n턴때의)
+e:
+w:
+h:
+
+--------------------확장 w턴 (50)
+
+</p></div>
+        <div id="text5" class="text-block"><p>
+
+2013year turn: according to 2062 w
+network,communication, try to overcome war, not open world, 
+n:절:
+t:
+f:절:재정,가치 보관방법,송금,은행,증권,채권,급여,코인(n턴때의)
+e:
+w:
+h:
+--------------------확장 w턴 (62)
+
+</p></div>
+        <div id="text6" class="text-block"><p>
+------------------------------
+1분류:몸영점 잡을 기회: 7일간의 휴식
+2분류:브채를 통해서 불로소득이 생기고
+3분류:세성을 발견햇고
+4분류:큰다발 완성
+------------------------------
+
+
+   64 버튼에 해당하는 내용입니다.i
+</p></div>
+	      </pre>
+      </td>
+
+      <!-- 중간 구분선 -->
+      <td style="width:5%; text-align:center;">
+        <hr style="height:100%; border-left:2px solid #999;">
+      </td>
+
+      <!-- 우측 버튼 영역 -->
+      <td style="width:25%;">
+        <button onclick="showText(1)"> N  </button>
+        <button onclick="showText(2)"> T   </button>
+        <button onclick="showText(3)"> F   </button>
+        <button onclick="showText(4)"> E   </button>
+        <button onclick="showText(5)"> W  </button>
+        <button onclick="showText(6)"> 64   </button>
+      </td>
+    </tr>
+  </table>
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 6; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+  </script>
+<div style="margin: 6 auto; width: 400px; border: 2px solid #ccc; text-align: left;">
+	<pre>
+1965year turn: according to 2074 n
+1977year turn: according to 2025 t
+1989year turn: according to 2037 f
+2001year turn: according to 2050 e
+2013year turn: according to 2062 w
+</pre>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

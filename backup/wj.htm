@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title> check box & radio box </title>
+</head>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>ej page</title>
+  <style>
+    .day-box {
+      display: none; /* hide first */
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+	
+  <h4>wj page for commany </h4>
+
+  <!-- day of week buton -->
+  <fieldset>
+    <legend>choce  item of sector </legend>
+    <br>
+    <label><input type="radio" name="weekday" value="sun"> asia</label>
+    <label><input type="radio" name="weekday" value="mon"> euope</label>
+    <label><input type="radio" name="weekday" value="tue">africa</label>
+    <label><input type="radio" name="weekday" value="wed"> north america </label>
+    <label><input type="radio" name="weekday" value="thu"> south america </label>
+    <label><input type="radio" name="weekday" value="fri"> austrilia </label>
+    <label><input type="radio" name="weekday" value="sat">polish of commany</label>
+  </fieldset>
+  <!-- 요일별 텍스트 영역 -->
+  <pre>
+  <div id="sun" class="day-box">
+asia
+일요일 텍스트 영역</div>
+
+
+  <div id="mon" class="day-box">
+euope 
+  <hr>
+  <h4>관리 기관</h4>
+
+</div>
+ 
+
+ <div id="tue" class="day-box">
+africa
+  <h4>관리 기관</h4>
+  </div>
+
+ <div id="wed" class="day-box">
+ north america
+  <h4>관리 기관</h4>
+
+</div>
+ 
+ <div id="thu" class="day-box">
+south america  
+  <h4>관리 기관</h4>
+</div>
+
+  <div id="fri" class="day-box">
+austirlia    
+
+  <h4>관리 기관</h4>
+ </div>
+  <div id="sat" class="day-box">
+  polish of fince 
+
+
+<h4>관리 기관</h4>
+
+</div>
+	  </pre>
+  <script>
+    // 모든 라디오 버튼에 이벤트 추가
+    document.querySelectorAll('input[name="weekday"]').forEach(radio => {
+      radio.addEventListener("change", (e) => {
+        const selected = e.target.value;
+
+        // 모든 텍스트 영역 숨기기
+        document.querySelectorAll(".day-box").forEach(box => {
+          box.style.display = "none";
+        });
+
+        // 선택한 요일 영역만 표시
+        const box = document.getElementById(selected);
+        if (box) {
+          box.style.display = "block";
+        }
+      });
+    });
+  </script>
+
+this line is   to devide   check box & radio box <br>
+<hr>
+  <fieldset>
+    <legend>check List of 2016 year.</legend>
+    <div><input type="checkbox" id="bo"><label for="book">2book</label></div>
+    <div><input type="checkbox" id="u"><label for="uld">     Uld_check ,3:30/bab</label></div>
+    <div><input type="checkbox" id="ta"><label for="task">   not Time? 2task</label></div>
+    <div><input type="checkbox" id="la"><label for="lang">  13page,c_language. python</label></div>
+    <div><input type="checkbox" id="b"><label for="book">  2book</label></div>
+    <div><input type="checkbox" id="uff"><label for="uld">      Uld_check ,3:30/bab</label></div>
+    <div><input type="checkbox" id="t"><label for="task">    not Time? 2task</label></div>
+    <div><input type="checkbox" id="l"><label for="lang">    13page,c_language. python</label></div>
+
+    perfome  all over list ????
+  </fieldset>
+
+  <script>
+    // list of check box
+    const ids = ["boo", "ul", "tas", "lan" , "bo", "u", "ta", "la" ];
+
+    // load status
+    window.onload = () => {
+      ids.forEach(id => {
+        const saved = localStorage.getItem(id);
+        if (saved === "true") {
+          document.getElementById(id).checked = true;
+        }
+      });
+    };
+
+    // save status 
+    ids.forEach(id => {
+      document.getElementById(id).addEventListener("change", (e) => {
+        localStorage.setItem(id, e.target.checked);
+      });
+    });
+  </script>
+</body>
+</html>

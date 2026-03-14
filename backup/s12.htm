@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>show  this month  and to do
+ </title>
+  <style>
+    .month-box {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h2>현재 월에 해당하는 텍스트 영역</h2>
+
+  <!-- 12개의 월별 텍스트 영역 -->
+  <div id="month1" class="month-box">
+<pre>
+1월 텍스트 영역
+
+
+</pre></div>
+<div id="month2" class="month-box">
+<pre>
+2월 텍스트 영역
+pr344
+=MID(C2,28,6)
+파란색 클릭
++ 누름  파일-가져오기-업로드-기기파일선택-선택후 열기
+가져오기  1단계 종료.출고?.nrt.inven.2book.12/29
+--------------------------------------
+D열 선택후 마우스 오른메뉴.-왼쪽 열 1개 삽입
+D2에 =MID(C2,28,6) 붙여넣기후 ENTER
+D2클릭후 모서리 + 생기면 클리후 끝에까지 드래그
+D2열 선택후 오른메뉴 정렬 실행.출고?.list.bob.2book.pax.
+---------------------------------------
+kk2월 텍스트 영역
+
+</pre></div>
+  <div id="month3" class="month-box">
+<pre>
+3월 텍스트 영역
+
+</pre></div>
+  <div id="month4" class="month-box">
+<pre>
+4월 텍스트 영역
+
+</pre></div>
+  <div id="month5" class="month-box">
+<pre>
+5월 텍스트 영역
+
+</pre></div>
+  <div id="month6" class="month-box">
+<pre>
+6월 텍스트 영역
+
+</pre></div>
+  <div id="month7" class="month-box">
+<pre>
+7월 텍스트 영역
+
+</pre></div>
+  <div id="month8" class="month-box">
+<pre>
+8월 텍스트 영역
+
+</pre></div>
+  <div id="month9" class="month-box">
+<pre>
+9월 텍스트 영역
+
+</pre></div>
+  <div id="month10" class="month-box">
+<pre>
+10월 텍스트 영역
+
+</pre></div>
+  <div id="month11" class="month-box">
+<pre>
+11월 텍스트 영역
+
+</pre></div>
+  <div id="month12" class="month-box">
+<pre>
+12월 텍스트 영역
+
+</pre></div>
+
+  <script>
+    // 오늘 날짜 가져오기
+    const today = new Date();
+    const month = today.getMonth() + 1; // getMonth()는 0~11 반환 → +1 해서 1~12
+
+    // 해당 월의 텍스트 영역 표시
+    const box = document.getElementById("month" + month);
+    if (box) {
+      box.style.display = "block";
+    }
+  </script>
+</body>
+</html>
+

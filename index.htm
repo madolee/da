@@ -1,0 +1,218 @@
+<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> Default repare Page: It works</title>
+<meta charset="UTF-8">
+<title>use me.csc</title>
+<link rel="stylesheet" href="1st.css" />
+</head>
+  <body>
+        <div class="outer">
+          It red outer  work
+        </div>
+ ""here is ~~~
+  <div class="main_page">
+ <background-image:url('./mac_nTE.jpg') width="100" height="100" media="screen">
+<background-image  src="./mac_nTE.jpg" >
+<!--- <source src="http://124.58.217.146:38/jpg/see2.mp4" type="video/mp4">
+
+  video  
+height="200" width="200" controls="" loop="no" muted="no" autoplay  preload="bbb"  
+srclang="ko" label="korean" default="">
+track src="http://124.58.217.146:38/jpg/see2.srt" srclang="ko" label="korean" default="">
+----->
+<video  
+height="150" width="180" controls="" loop=""     preload="bbb"  
+srclang="ko" label="korean" default="">
+<source src="./see1.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>^M
+</video>
+
+<video  
+height="150" width="180" controls=""   autoplay="2"    preload="bbb"  
+srclang="ko" label="korean" default="">
+<source src="./ree2.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>^M
+</video>
+
+<video  
+height="150" width="180" controls=""     preload="bbb"  
+srclang="ko" label="korean" default="">
+<source src="./see3.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>^M
+</video>
+<video  
+height="150" width="180" controls=""       preload="bbb"  
+srclang="ko" label="korean" default="">
+<source src="./see4.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>^M
+</video>
+<div class="main_page">
+        <div class="banner">
+          It red banner work  work
+        </div>
+      <div class="page_header floating_element">
+        <img src="icons/ubuntu-logo.png" alt="Ubuntu Logo"
+             style="width:84px;height:46px;" class="floating_element" />
+        <div>
+          <span style="margin-top: 1em;" class="floating_element">
+            Apache2 Default Pag& music gallary
+          </span>
+        </div>
+        <div class="banner">
+          It red background work
+        </div>
+
+      </div>
+      <div class="content_section floating_element">
+        <div class="content_section_text">
+          <p>
+        <div class="banner">
+          It 2th  red background work
+        </div>
+                packaging is derived.
+                If you can read this page, it means that the Apache HTTP server installed at
+                this site is working properly. You should <b>replace this file</b> (located at
+                <tt>/var/www/html/index.html</tt>) before continuing to operate your HTTP server.
+          </p>
+
+          <p>
+                about, this probably means that the site is currently unavailable due to
+                If the problem persists, please contact the site's administrator.
+          </p>
+
+        </div>
+        <div class="section_header">
+          <div id="changes"></div>
+                Configuration Overview
+        </div>
+        <div class="content_section_text">
+          <p>
+<a href="./pass.html" target="_blank">pass</a>
+                Ubuntu's Apache2 default configuration is different from the
+                upstream default configuration, and split into several files optimized for
+                interaction with Ubuntu tools. The configuration system is
+                <b>fully documented in
+                /usr/share/doc/apache2/README.Debian.gz</b>. Refer to this for the full
+                documentation. Documentation for the web server itself can be
+                found by accessing the <a href="/manual">manual</a> if the <tt>apache2-doc</tt>
+                package was installed on this server.
+e         </p>
+          <p>
+                The configuration layout for an Apache2 web server installation on Ubuntu systems is as follows:
+          </p>
+          <pre>
+
+<script>
+var newWindow=windows.open("","msgwindow","width=200, height=200");
+newWindow.document.write("new windows open");
+let counter = 0;
+let interval = setInterval(function () {
+    counter++;
+    if (counter > 24) {
+        console.log('Done!');
+        clearInterval(interval);
+        return;
+    }
+    newWindow.document.write(counter+'One shour passed...'+'\n');
+}, 36000);
+</script>
+section header text  
+          </pre>
+          <ul>
+                        <li>
+                           <tt>apache2.conf</tt> is the main configuration
+                           file. It puts the pieces together by including all remaining configuration
+                           files when starting up the web server.
+                        </li>
+
+                        <li>
+                           <tt>ports.conf</tt> is always included from the
+                           main configuration file. It is used to determine the listening ports for
+                           incoming connections, and this file can be customized anytime.
+                        </li>
+
+                        <li>
+                           Configuration files in the <tt>mods-enabled/</tt>,
+                           <tt>conf-enabled/</tt> and <tt>sites-enabled/</tt> directories contain
+                           particular configuration snippets which manage modules, global configuration
+                           fragments, or virtual host configurations, respectively.
+                        </li>
+
+                        <li>
+                           They are activated by symlinking available
+                           configuration files from their respective
+                           *-available/ counterparts. These should be managed
+                           by using our helpers
+                           <tt>
+                                a2enmod,
+                                a2dismod,
+                           </tt>
+                           <tt>
+                                a2ensite,
+                                a2dissite,
+                            </tt>
+                                and
+                           <tt>
+                                a2enconf,
+                                a2disconf
+                           </tt>. See their respective man pages for detailed information.
+                        </li>
+
+                        <li>
+                           start/stop the service use <tt>systemctl start apache2</tt> and
+                           <tt>systemctl stop apache2</tt>, and use <tt>systemctl status apache2</tt>
+                           and <tt>journalctl -u apache2</tt> to check status.  <tt>system</tt>
+                           and <tt>apache2ctl</tt> can also be used for service management if
+                           desired.
+                           <b>Calling <tt>/usr/bin/apache2</tt> directly will not work</b> with the
+                           default configuration.
+                        </li>
+          </ul>
+        </div>
+
+        <div class="section_header">
+            <div id="docroot"></div>
+                Document Roots
+        </div>
+
+        <div class="content_section_text">
+            <p>
+                By default, Ubuntu does not allow access through the web browser to
+                <em>any</em> file outside of those located in <tt>/var/www</tt>,
+                <a href="http://httpd.apache.org/docs/2.4/mod/mod_userdir.html" rel="nofollow">public_html</a>
+                directories (when enabled) and <tt>/usr/share</tt> (for web
+                applications). If your site is using a web document root
+                located elsewhere (such as in <tt>/srv</tt>) you may need to whitelist your
+                document root directory in <tt>/etc/apache2/apache2.conf</tt>.
+            </p>
+            <p>
+                The default Ubuntu document root is <tt>/var/www/html</tt>. You
+                can make your own virtual hosts under /var/www.
+            </p>
+        </div>
+
+        <div class="section_header">
+          <div id="bugs"></div>
+                Reporting Problems
+        </div>
+        <div class="content_section_text">
+          <p>
+                Please use the <tt>ubuntu-bug</tt> tool to report bugs in the
+                Apache2 package with Ubuntu. However, check <a
+                href="https://bugs.launchpad.net/ubuntu/+source/apache2"
+                rel="nofollow">existing bug reports</a> before reporting a new bug.
+          </p>
+          <p>
+                Please report bugs specific to modules (such as PHP and others)
+                to their respective packages, not to the web server itself.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <div class="validator">
+    </div>
+  </body>
+</html>

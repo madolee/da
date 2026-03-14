@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Button Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding:10px;
+    }
+    /* 버튼 영역 */
+    .button-bar {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid #999; /* 구분선 */
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .button-bar button {
+      margin: 0 8px;
+      padding: 8px 16px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .button-bar button.active {
+      background-color: #4CAF50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    /* 내용 영역 */
+    .text-block {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px auto;
+      max-width: 800px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 버튼 영역 -->
+  <div class="button-bar">
+    <button onclick="showText(1)">n</button>
+    <button onclick="showText(2)">t</button>
+    <button onclick="showText(3)">f</button>
+    <button onclick="showText(4)">e</button>
+    <button onclick="showText(5)">w</button>
+    <button onclick="showText(6)">h</button>
+  </div>
+
+  <!-- 내용 영역 -->
+  <div id="text1" class="text-block"><p>
+
+          물질에 관하여 .   
+	  첫 번째 버튼에 해당하는 내용입니다.
+	  
+	  </p></div>
+  <div id="text2" class="text-block"><p>두 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text3" class="text-block"><p>세 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text4" class="text-block"><p>네 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text5" class="text-block"><p>다섯 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text6" class="text-block"><p>여섯 번째 버튼에 해당하는 내용입니다.</p></div>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 6; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll(".button-bar button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+
+    // 페이지 로딩 시 첫 번째 버튼과 내용 표시
+    window.onload = function() {
+      const firstButton = document.querySelector(".button-bar button");
+      if (firstButton) {
+        firstButton.classList.add("active");
+      }
+      const firstBlock = document.getElementById("text1");
+      if (firstBlock) {
+        firstBlock.style.display = "block";
+      }
+    };
+  </script>
+  <pre>
+ android studio - work pl<br>
+--------N---- turn 
+하늘에 올라간 이들이 많은데....
+가까운 이들 부터...
+먼 이름 없는 이들까지..
+물질에 관한 ,,,
+
+n:우주와 공통적으로  
+t:보이지 않는 에너지등의 물질에 관한
+f:힘 종류
+e:지구에 주로 있는/창조된
+w:빛
+h:몸에 관련된
+
+명왕성 미생물.형태 생명체. 학습기능 있을지.
+종족보존 가능할지.단체문화 소멸 교육등 투쟁.계급 선전
+  </pre>	
+  <hr>
+</body>
+</html>
+

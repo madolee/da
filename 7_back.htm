@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>버튼 클릭 시 텍스트 표시 (7개)</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      vertical-align: top;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      display: block;
+      margin: 5px 0;
+      width: 100px;
+    }
+    p {
+      display: none; /* 기본적으로 숨김 */
+      margin: 10px 0;
+    }
+    pre{
+	    background-color:#f0f0f0;
+	    padding:5px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <!-- 좌측 버튼 영역 -->
+      <td>
+        <button onclick="showText(1)">버튼 1</button>
+        <button onclick="showText(2)">버튼 2</button>
+        <button onclick="showText(3)">버튼 3</button>
+        <button onclick="showText(4)">버튼 4</button>
+        <button onclick="showText(5)">버튼 5</button>
+        <button onclick="showText(6)">버튼 6</button>
+        <button onclick="showText(7)">버튼 7</button>
+      </td>
+
+      <!-- 우측 텍스트 영역 -->
+      <td>
+        <p id="text1">버튼 1을 눌렀을 때 보이는 텍스트입니다.
+<pre>	
+12월
+
+insert
+NJ=MARA?/
+TL=MAC.KEY.WORK.SUSHI.HOME.SOPRANO.INVITE
+FL=SLEEP.&   EU=SLEEP& ST.next J-work   WJ=B WORK:제육 냠냠(정우종)
+HY:clasic piano&apple  play효연
+NJ:print&send?:4out   /with TOM-순디국.멍.버킹.-한의 숨은실력자
+TU:mac2th.brazil kill. sushi? walk sleep. meat. bench.25day:notACD(KFC.TOM.롯백.작컵술)
+*FJ:5C시작.빵숨김.추운옆방.금주.13PLAN.
+EY:나.맥.사과.빵.PIANO.일찍출고.2task.
+WY:5CE=또맥.원종맥-저녁비.
+HL:동방의정수는?맥&쇼핑.바칼.new_PASS.회밥X.아세안중H
+(필핀.인니.미얀.벳남.태국.라오스.캄보.말레이.동티.싱가,브루나이.호주.파루아.뉴질랜드.하와이)
+NL:last work.5/6MUSIC.nextACD.bag.
+after:bag.8-home 14-NNU:마라&ACD.역.with-TOM.버킹멍. 
+다음날Y
+
+--
+11월:집과무난무사:동생들배려:5천연봉자
+구미결혼식0:내년비 플랜0:(전반16진행중2틀휴가가포함된):1회마라주획득:
+군대모임예정.후반10/5진행예정-지구공전시대.태양공전시대.
+12월:5-10-유툽.숩.업빛단절.11-31근무향동만.유툽단절 31일까지 연장하고.
+새로운 일표현발견 8일오후=FY. YT,F.E.W.H순으로 진행 -특징날자에순서없음
+EE때만고량주.CN cutday적용.목본합치tfewhn.1T 1F=오띠의 시작으로 정함
+13개의 오띠달어찌보냄?
+27년까지삶. 28-2/4목턴 어찌 보낼?옷이날개인데,,1목턴은 어찌맞이하고?
+어떤 변화들이 기다릴지(신체.사회.습관.일상.관계.재정)
+  
+시먹.서비손끝귀일fw향동감사찾입미소담표큰다발기본걷짭멍띵아슬.곡기상하온화.뽕짝.올열매눈감.묵주
+기달=큰동허기취침뚫림.리듬맨
+10.3:서울시민이엇던;오후3일연속 오전2틀또오후다음 야근 2틀=수난의 주간.N T -ROUND.해변가 수초캐먹고.멀리 걸어서통학.늦잠.떠돌이아이.H달과 관련된 문화적 결핍?기술없음? 시절? 나는 찾앗어야 햇고 적용햇어야 햇는데. 다리 부러지고.환타지적.N그렇게 땔깜모으러 다닌.땅없던.
+KAS-65년부터 퇴직/HHH=2은하인식과 태양공전인식=서구집중시대 종료 ?
+TFE:TFday.E 시간= 순열 순차-
+FE=서울시민지위상징.서울식 뷔페탐방?.기업카드20만.국민카드15만캐시백.전화해확인해야
+2틀간휴일,,쉬고오전.FT,F사진찍고.옷교체.현대버거.치킨?4년간의대체집중할거.
+아프리카 음악.위호산술.맥날.삼겹?.닭찜?.N:어려웟던F절.톰3일간.노전의 휴일?.배낭.
+야근까지23일7일간=11.12마무리구상/31일까지(전송.출력)
+2틀(15.16)=급여구상.(부천수도권통신주관기관)
+2001년의 1년간 방황. 2002년도 취직햇으니.그땐 왠지편함.적은 방세 출근하면 많은 사람들 보고 일도 안힘들고  사회속에서 컴터 직업 그만두고 순전독립한..오늘 내일 그때의 느낌으로근무
+WN+N=64.사띠.82.00년.19년도.10월말.
+
+
+*/
+
+/** @OnlyCurrentDoc 
+9.3일.오늘13.2task.내일13.모래2틀 휴일인데,전기고지서.진단.회덮밥.톰.오전맥모닝3일. 
+다음3+2틀 근무를 위한 멍(남부광장).달구경.안식과지혜.낮잠2틀.교류는?.아시아대륙의 기술(NWH).
+9.7:^ 2task물.ㅌㅈㅇ.ㄱ^=1ㅇ-h 바다생명체.ㅈ=하부이동수단.ㅇ=항상인류.ㅁ퇴근톰.
+어제 ㅁ날규정?ㄱㄱ=금성날.
+엮어야 되는데..아무거나 엮어라
+내일월오전비.오침(밥.사발면)=(역광장.2멍.9시집뚝불고기)
+ㅋㅋ 오전근무:h달관련기구(사람-행정부).:H달:대상
+9/22:EWH 오후: 내일.모래.글피 오후:다음 휴일. 4일만의 휴일인데:포도먹고.2task2장 수령. 전송준비.내일바쁜오휴:pda 휴대.일괄출.WF일때끝.다음10월준비.EH일(균형잇어보임)
+9/27.2+2(야).1휴.9일연속ㅠ.특히나명절.18년간이레,1일멍중요.하루하루가 천국처럼
+</pre>	
+</p>
+        <p id="text2">버튼 2를 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text3">버튼 3을 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text4">버튼 4를 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text5">버튼 5를 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text6">버튼 6을 눌렀을 때 보이는 텍스트입니다.</p>
+        <p id="text7">버튼 7을 눌렀을 때 보이는 텍스트입니다.</p>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 7; i++) {
+        document.getElementById("text" + i).style.display = "none";
+      }
+      // 선택한 텍스트만 보이기
+      document.getElementById("text" + num).style.display = "block";
+    }
+  </script>
+</body>
+</html>
+

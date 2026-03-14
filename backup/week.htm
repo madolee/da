@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>text view of day</title>
+  <style>
+    .day-box {
+      display: none; /* hide first  */
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h4>text of the day</h2>
+
+  <!-- 7 text area -->
+  <div id="sun" class="day-box">make rule</div>
+ 
+  <div id="mon" class="day-box">mam tree</div>
+
+  <div id="tue" class="day-box">hanja </div>
+
+  <div id="wed" class="day-box">this is my way</div>
+
+  <div id="thu" class="day-box">bring to me jupiter</div>
+
+  <div id="fri" class="day-box">make empty mind</div>
+
+  <div id="sat" class="day-box">sat:prepare future</div>
+
+  <script>
+    // bring day code 
+    const today = new Date();
+    const dayOfWeek = today.getDay(); 
+    // getDay() → 0(일요일) ~ 6(토요일)
+
+    // 요일 ID 매핑
+    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+    //  display today  
+    const todayBox = document.getElementById(days[dayOfWeek]);
+    if (todayBox) {
+      todayBox.style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
