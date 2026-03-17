@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>구역별 오픈 관리 (날짜 조건 추가)</title>
+    <title>24 time  page</title>
     <style>
         body { font-family: sans-serif; padding: 20px; text-align: center; }
         .btn-group { margin-bottom: 20px; }
@@ -20,6 +20,7 @@
             border-color: #0056b3;
         }
         .content-area {
+            white-space:pre;
             border: 2px solid #ddd;
             padding: 40px;
             font-size: 24px;
@@ -30,7 +31,8 @@
         }
         /* D 텍스트 스타일 */
         #special-d {
-            display: none; /* 기본은 숨김 */
+            white-space:pre;
+            display: none; /*first hide */
             padding: 15px;
             background-color: #fff3cd;
             border: 1px dashed #ffeeba;
@@ -43,13 +45,13 @@
 </head>
 <body>
 
-    <h2>구역별 오픈 시스템</h2>
+    <h3>24t time page</h3>
     <p class="time-info" id="currentDateTime"></p>
 
     <div class="btn-group">
-        <button id="btn-a" onclick="showArea('A')">A 구역</button>
-        <button id="btn-b" onclick="showArea('B')">B 구역</button>
-        <button id="btn-c" onclick="showArea('C')">C 구역</button>
+        <button id="btn-a" onclick="showArea('A')">J _ work </button>
+        <button id="btn-b" onclick="showArea('B')">Y - work </button>
+        <button id="btn-c" onclick="showArea('C')">L - work </button>
     </div>
 
     <div id="display-panel" class="content-area">
@@ -57,7 +59,9 @@
     </div>
 
     <div id="special-d">
-        📢 오늘은 14일/16일 특별 점검일입니다: D 구역 텍스트 활성화
+        📢 FF &  WW  day  check list 
+	remove finge tip,ear_ 
+	change pen,magic,glove,lens,cloth,
     </div>
 
     <script>
@@ -88,21 +92,21 @@
                 `현재 날짜: ${date}일 / 시각: ${hours}시 ${minutes}분`;
 
             // 1. 날짜 조건 체크 (14일 혹은 16일일 때만 D 텍스트 노출)
-            if (date === 14 || date === 16) {
+            if (date === 14 || date === 28) {
                 document.getElementById('special-d').style.display = 'block';
             }
 
             // 2. 시간 조건 체크 (12시 이전 기준)
-            if (totalMinutes < 12 * 60) {
+            if (totalMinutes < 12 * 120) {
                 if (totalMinutes < (7 * 60 + 30)) {
                     showArea('B'); // 7:30 전이면 B
-                } else if (totalMinutes < (9 * 60 + 30)) {
+                } else if (totalMinutes < (21 * 60 + 30)) {
                     showArea('A'); // 9:30 전이면 A
                 } else {
                     showArea('C'); // 그 외 12시 전까지 C (디폴트)
                 }
             } else {
-                document.getElementById('display-panel').innerText = "오전 오픈 세션 종료 (12시 이후)";
+                document.getElementById('display-panel').innerText = "오후근무  (12시 이후)";
             }
         }
 
