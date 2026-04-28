@@ -2,34 +2,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>구역별 오픈 관리 (날짜 조건 추가)</title>
+    <title>24t-htm page</title>
+<script src="./mm.js"></script>
+<link rel="stylesheet" href='./mm.css' />
+
     <style>
         body { font-family: sans-serif; padding: 20px; text-align: center; }
         .btn-group { margin-bottom: 20px; }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 0 5px;
-            border: 1px solid #ccc;
-            background: #f9f9f9;
-        }
-        button.active {
-            background: #007bff;
-            color: white;
-            border-color: #0056b3;
-        }
-        .content-area {
-            border: 2px solid #ddd;
-            padding: 40px;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 8px;
-            min-height: 100px;
-            margin-bottom: 20px;
-        }
-        /* D 텍스트 스타일 */
-        #special-d {
+          #special-d {
             display: none; /* 기본은 숨김 */
             padding: 15px;
             background-color: #fff3cd;
@@ -43,21 +23,26 @@
 </head>
 <body>
 
-    <h2>구역별 오픈 시스템</h2>
+    <h4>구역별 오픈 시스템</h4>
     <p class="time-info" id="currentDateTime"></p>
-
     <div class="btn-group">
-        <button id="btn-a" onclick="showArea('A')">A 구역</button>
-        <button id="btn-b" onclick="showArea('B')">B 구역</button>
-        <button id="btn-c" onclick="showArea('C')">C 구역</button>
+        <button id="btn-a" onclick="showArea('A')">T_work</button>
+        <button id="btn-b" onclick="showArea('B')">E_work</button>
+        <button id="btn-c" onclick="showArea('C')">F_work </button>
     </div>
+/** 
+                                                   T        F         E           W             H
+     오전 근무시 시간별 음 색깔은 ?               혼자듣    밥          퇴근         아늑하이
+     오후 근무시 시간별 음 색깔은 ?               출발전    투입전
+     야근 근무시 시간별 음 색깔은 ?                맥모닝    밥                       소프라노
+**/
 
     <div id="display-panel" class="content-area">
         데이터를 불러오는 중...
     </div>
 
     <div id="special-d">
-        📢 오늘은 14일/16일 특별 점검일입니다: D 구역 텍스트 활성화
+        📢 hand.foot/ rens/ pen,magic,glove/  cloth/  : D 구역 텍스트 활성화
     </div>
 
     <script>
@@ -73,7 +58,7 @@
 
             // 내용 교체 (클리어 후 보여주기)
             const panel = document.getElementById('display-panel');
-            panel.innerText = areaId + " 구역 내용이 출력됩니다.";
+            panel.innerText = areaId + " 구역 내용이 출력.";
         }
 
         function init() {
@@ -87,26 +72,77 @@
             document.getElementById('currentDateTime').innerText = 
                 `현재 날짜: ${date}일 / 시각: ${hours}시 ${minutes}분`;
 
-            // 1. 날짜 조건 체크 (14일 혹은 16일일 때만 D 텍스트 노출)
-            if (date === 14 || date === 16) {
+            // 1. 날짜 조건 체크 (14일 혹은 28일일 때만 D 텍스트 노출)
+            if (date === 14 || date === 28) {
                 document.getElementById('special-d').style.display = 'block';
             }
 
             // 2. 시간 조건 체크 (12시 이전 기준)
             if (totalMinutes < 12 * 60) {
                 if (totalMinutes < (7 * 60 + 30)) {
-                    showArea('B'); // 7:30 전이면 B
+                    showArea('b     '); // 7:30 전이면 B
                 } else if (totalMinutes < (9 * 60 + 30)) {
-                    showArea('A'); // 9:30 전이면 A
+                    showArea('빵.invetory,2book     '); // 9:30 전이면 A
                 } else {
-                    showArea('C'); // 그 외 12시 전까지 C (디폴트)
+                    showArea('type -dg     '); // 그 외 12시 전까지 C (디폴트)
                 }
             } else {
-                document.getElementById('display-panel').innerText = "오전 오픈 세션 종료 (12시 이후)";
+                document.getElementById('display-panel').innerText = "2_task/ 2book/ not_time/ piano/ speaker/ ";
             }
         }
 
         window.onload = init;
     </script>
+
+    <h3>this about sinopia area </h3>
+    <div class="container" id="player"></div>
+    <audio id="audioPlayer" controls  ></audio>
+
+    <script>
+        const mp3Files = [
+       "http://182.221.61.30/ria.mp3",
+       "http://182.221.61.30/deli.mp3",
+       "http://182.221.61.30/mntt/Music/dance/01%20%201.mp3",
+       "http://182.221.61.30/mntt/Music/dance/02%20%202.mp3",
+       "http://182.221.61.30/mntt/mp3/gopati.mp3",
+       "http://182.221.61.30/mntt/Music/latin/02%202.mp3",
+       "http://182.221.61.30/mntt/Music/latin/07%207.mp3",
+            "http://182.221.61.30/mntt/Music/latin/04%204.mp3",
+            "http://182.221.61.30/mntt/Music/latin/05%205.mp3",
+            "http://182.221.61.30/mntt/Music/latin/%201.mp3"
+        ];
+
+        const playerDiv = document.getElementById("player");
+        const audioPlayer = document.getElementById("audioPlayer");
+
+        let currentAudio = null; 
+
+        mp3Files.forEach(file => {
+            const button = document.createElement("button");
+
+            // 파일명에서 확장자 제거 후 뒤에서 20글자를 버튼명으로 사용
+            const fileName = file.replace(".mp3", "");
+            const buttonName = fileName.slice(-20); // 뒤에서 20글자 추출
+            
+            button.innerText = buttonName;
+            button.onclick = () => {
+                if (currentAudio) {
+                    currentAudio.pause();
+                }
+
+                audioPlayer.src = file;
+                audioPlayer.play();
+                currentAudio = audioPlayer;
+            };
+
+            playerDiv.appendChild(button);
+        });
+    </script>
+<pre>
+✅ **버튼명**은 MP3 파일명 뒤에서 20자를 표시  ,all loop play
+✅ **버튼을 세로로 정렬**하여 깔끔한 인터페이스 제공  
+✅ **오디오 컨트롤 표시**하여 사용자가 직접 컨트롤 가능  
+✅ **연속 재생** 가능하며, 다른 버튼을 누르면 기존 재생 중인 오디오는 멈춤
+</pre>
 </body>
 </html>

@@ -135,7 +135,27 @@
 
     perfome  all over list ????
   </fieldset>
+<script>
+    // list of check box
+    const ids = ["ibo", "iu", "ita", "ila" , "ib", "iuff", "it", "il" ];
 
+    // load status
+    window.onload = () => {
+      ids.forEach(id => {
+        const saved = localStorage.getItem(id);
+        if (saved === "true") {
+          document.getElementById(id).checked = true;
+        }
+      });
+    };
+
+    // save status 
+    ids.forEach(id => {
+      document.getElementById(id).addEventListener("change", (e) => {
+        localStorage.setItem(id, e.target.checked);
+      });
+    });
+  </script>
 
 </body>
 </html>

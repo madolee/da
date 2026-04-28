@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href='./mz.css' />
+  <title>click and view </title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=SUIT:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+body{
+      margin: 0;
+      color: var(--text);
+      background:
+           radial-gradient(1200px 600px at 15% 15%, rgba(141,200,10,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(122,168,255,.18), transparent 62%),
+        radial-gradient(700px 550px at 70% 90%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, #070a0f, #0f0f14);
+      font-family: "SUIT", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <main>
+    <div class="shell">
+      <header>
+        <div class="kicker">HTML / CSS / JS Sample</div>
+        <h3>click  and <br>view text and hide </h3>
+        <p class="lead">
+          press under button and hide text 
+         for  acces to <code class="inline">aria-expanded</code> and  <code class="inline">aria-controls</code> use to acces 
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="toggle-title">
+        <div class="panel-inner">
+          <div class="row">
+            <div>
+              <div id="toggle-title" class="pill">TOGGLE</div>
+              <div class="hint">click  → display  text </div>
+            </div>
+
+            <button
+              id="toggleBtn"
+              class="btn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="revealArea"
+            >
+              <span id="btnLabel">view text  </span>
+              <span aria-hidden="true">↵</span>
+            </button>
+          </div>
+
+          <div id="revealArea" class="reveal hidden" role="region" aria-label="표시되는 텍스트들">
+            <div class="reveal-item">
+              <strong>1) 첫 번째 텍스트</strong>
+              <p>버튼을 누르면 보이는 영역입니다. 필요한 내용을 자유롭게 넣으세요.</p>
+            </div>
+            <div class="reveal-item">
+              <strong>2) 두 번째 텍스트</strong>
+              <p>여러 줄 설명도 가능합니다. 간단한 공지/FAQ/안내문 등에 좋아요.</p>
+            </div>
+            <div class="reveal-item">
+              <strong>3) 세 번째 텍스트</strong>
+              <p>다시 버튼을 누르면 이 영역은 숨겨집니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>Tip: instaed of text  ,form img list any other form  can be list </span>
+        <span>Keyboard: Tab → Enter/Space  turn on button </span>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const btn = document.getElementById('toggleBtn');
+    const label = document.getElementById('btnLabel');
+    const area = document.getElementById('revealArea');
+
+    function showArea() {
+      area.classList.remove('hidden');
+
+      // Stagger reveal animation
+      const items = area.querySelectorAll('.reveal-item');
+      items.forEach((el, i) => {
+        el.classList.remove('animate-in'); // reset
+        el.style.animationDelay = (i * 90) + 'ms';
+        // force reflow to restart animation
+        void el.offsetWidth;
+        el.classList.add('animate-in');
+      });
+
+      btn.setAttribute('aria-expanded', 'true');
+      label.textContent = 'text view ';
+    }
+
+    function hideArea() {
+      area.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      label.textContent = 'text hide ';
+    }
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      expanded ? hideArea() : showArea();
+    });
+  </script>
+</body>
+</html>

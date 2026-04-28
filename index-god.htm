@@ -1,0 +1,367 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>버튼 클릭 → 텍스트 표시 (샘플)</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=SUIT:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.88);
+      --muted: rgba(255,255,255,.62);
+      --accent: #8DFFB3;
+      --accent2:#7AA8FF;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 15%, rgba(141,255,179,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(122,168,255,.18), transparent 62%),
+        radial-gradient(700px 550px at 70% 90%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, #070a0f, #0b0f14);
+      font-family: "SUIT", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grid texture */
+    .bg-grid{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .35;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(60% 60% at 50% 40%, black 45%, transparent 75%);
+    }
+
+    main{
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: clamp(20px, 4vw, 54px);
+    }
+
+    .shell{
+      width: min(980px, 100%);
+      display: grid;
+      gap: clamp(16px, 2.6vw, 28px);
+    }
+
+    header{
+      display: grid;
+      gap: 10px;
+    }
+
+    .kicker{
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    h1{
+      margin: 0;
+      font-family: "Black Han Sans", "SUIT", sans-serif;
+      font-weight: 400;
+      font-size: clamp(34px, 5.4vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+
+    .lead{
+      margin: 0;
+      max-width: 62ch;
+      font-size: clamp(14px, 1.7vw, 18px);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .panel{
+      position: relative;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--panel), rgba(255,255,255,.04));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(600px 220px at 20% 0%, rgba(141,255,179,.22), transparent 60%),
+        radial-gradient(700px 260px at 95% 10%, rgba(122,168,255,.22), transparent 60%);
+      opacity: .55;
+      filter: blur(14px);
+      pointer-events:none;
+    }
+
+    .panel-inner{
+      position: relative;
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      gap: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .btn{
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 16px;
+      background:
+        linear-gradient(135deg, rgba(141,255,179,.18), rgba(122,168,255,.16)),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.18);
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: .02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .btn:focus-visible{
+      outline: 3px solid rgba(141,255,179,.35);
+      outline-offset: 3px;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(141,255,179,.38);
+      box-shadow: 0 16px 45px rgba(0,0,0,.35);
+    }
+
+    .btn:active{
+      transform: translateY(0px) scale(.99);
+    }
+
+    .pill{
+      font-size: 12px;
+      color: rgba(0,0,0,.78);
+      background: linear-gradient(135deg, var(--accent), rgba(255,255,255,.85));
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Toggle area */
+    .reveal{
+      display: grid;
+      gap: 12px;
+      padding-top: 6px;
+    }
+
+    .hidden{
+      display: none;
+    }
+
+    .reveal-item{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 14px 14px;
+    }
+
+    .reveal-item strong{
+      display: block;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .reveal-item p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    /* Stagger animation */
+    @keyframes riseIn {
+      from{ opacity: 0; transform: translateY(10px); filter: blur(2px); }
+      to  { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .animate-in{
+      animation: riseIn .45s ease both;
+    }
+
+    footer{
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hint{
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+    }
+
+    code.inline{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: rgba(255,255,255,.86);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main>
+    <div class="shell">
+      <header>
+        <div class="kicker">HTML / CSS / JS Sample</div>
+        <h1>버튼 하나로<br>텍스트 보이기/숨기기</h1>
+        <p class="lead">
+          아래 버튼을 누르면 텍스트들이 나타나고, 다시 누르면 숨겨집니다.
+          접근성을 위해 <code class="inline">aria-expanded</code>와 <code class="inline">aria-controls</code>를 함께 사용합니다.
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="toggle-title">
+        <div class="panel-inner">
+          <div class="row">
+            <div>
+              <div id="toggle-title" class="pill">TOGGLE</div>
+              <div class="hint">버튼 클릭 → 텍스트 목록 표시</div>
+            </div>
+
+            <button
+              id="toggleBtn"
+              class="btn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="revealArea"
+            >
+              <span id="btnLabel">텍스트 보이기</span>
+              <span aria-hidden="true">↵</span>
+            </button>
+          </div>
+
+          <div id="revealArea" class="reveal hidden" role="region" aria-label="표시되는 텍스트들">
+            <div class="reveal-item">
+              <strong>1) 첫 번째 텍스트</strong>
+              <p>버튼을 누르면 보이는 영역입니다. 필요한 내용을 자유롭게 넣으세요.</p>
+            </div>
+            <div class="reveal-item">
+              <strong>2) 두 번째 텍스트</strong>
+              <p>여러 줄 설명도 가능합니다. 간단한 공지/FAQ/안내문 등에 좋아요.</p>
+            </div>
+            <div class="reveal-item">
+              <strong>3) 세 번째 텍스트</strong>
+              <p>다시 버튼을 누르면 이 영역은 숨겨집니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>Tip: 텍스트 대신 이미지, 폼, 리스트 등 어떤 요소든 토글 가능</span>
+        <span>Keyboard: Tab → Enter/Space로 버튼 작동</span>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const btn = document.getElementById('toggleBtn');
+    const label = document.getElementById('btnLabel');
+    const area = document.getElementById('revealArea');
+
+    function showArea() {
+      area.classList.remove('hidden');
+
+      // Stagger reveal animation
+      const items = area.querySelectorAll('.reveal-item');
+      items.forEach((el, i) => {
+        el.classList.remove('animate-in'); // reset
+        el.style.animationDelay = (i * 90) + 'ms';
+        // force reflow to restart animation
+        void el.offsetWidth;
+        el.classList.add('animate-in');
+      });
+
+      btn.setAttribute('aria-expanded', 'true');
+      label.textContent = '텍스트 숨기기';
+    }
+
+    function hideArea() {
+      area.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      label.textContent = '텍스트 보이기';
+    }
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      expanded ? hideArea() : showArea();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+/**
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>기능 실현 샘플</title>
+    <script>
+        function changeText() {
+            document.getElementById('sampleText').innerText = '텍스트가 변경되었습니다!';
+}
+function chfont() {
+    document.getElementById('content').style.fontSize = '25px';
+}
+
+       </script>
+</head>
+<body>
+    <p id="sampleText">원래 텍스트입니다.</p>
+    <button onclick="changeText()">텍스트 변경2</button>
+<p id="content">원래 텍스트입니다.</p>
+
+ <button onclick="chfont()">텍스트 변경3</button>
+<button type="button" class="bt1" onclick="chfont();"> chang font </button>
+</body>
+</html>

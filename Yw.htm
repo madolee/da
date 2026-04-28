@@ -2,7 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Button Page Layout</title>
+   <script src="./mm.js"></script>
+  <link rel="stylesheet" href="./mm.css" />
+  
+  <title>yw - page </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,31 +18,6 @@
       vertical-align: top;
       padding: 10px;
     }
-    /* 버튼 스타일 */
-    button {
-      display: block;
-      margin: 8px 0;
-      width: 120px;
-      padding: 8px;
-      border: 1px solid #333;
-      background-color: #f0f0f0;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    button.active {
-      background-color: #4CAF50; /* 눌린 상태 색상 */
-      color: white;
-      transform: scale(1.05);   /* 강조 효과 */
-    }
-    /* 텍스트 블록 */
-    .text-block {
-      display: none; /* 기본적으로 숨김 */
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      padding: 10px;
-      background-color: #fafafa;
-    }
-    /* 세로 구분선 */
     .vertical-line {
       border-left: 2px solid #999;
       height: 100%;
@@ -50,6 +28,7 @@
   <table>
     <tr>
       <!-- 좌측 내용 영역 -->
+	<pre>
       <td style="width:70%;">
         <div id="text1" class="text-block"><p>
 station over earth   future  image .<br>
@@ -61,14 +40,45 @@ station over earth   future  image .<br>
 인류출현 300 만년전ㅡ불사용 142만 년전 .호모사피엔스 4만년전<br>
 12간중 몃초에불과한 역기록사<br>
 
+	6000년전
+	첫째 버튼에 해당되는 내용
 </p></div>
-        <div id="text2" class="text-block"><p>두 번째 버튼에 해당하는 내용입니다.</p></div>
-        <div id="text3" class="text-block"><p>세 번째 버튼에 해당하는 내용입니다.</p></div>
-        <div id="text4" class="text-block"><p>네 번째 버튼에 해당하는 내용입니다.</p></div>
-        <div id="text5" class="text-block"><p>다섯 번째 버튼에 해당하는 내용입니다.</p></div>
-        <div id="text6" class="text-block"><p>여섯 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text2" class="text-block"><p>
+                6만년전
+		두 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text3" class="text-block"><p>
+
+                
+		60만년전
+		세 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text4" class="text-block"><p>
+`
+		600만년전
+		네 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text5" class="text-block"><p>다
+n:영혼 
+t:부팅된 인간
+e:우주적 시각의 각 대륙
+
+
+		6000만년전
+섯 번째 버튼에 해당하는 내용입니다.</p></div>
+        <div id="text6" class="text-block"><p>
+                body: 일신상의 ,개인업적.트라이,물질의 몸,자격과 특기 배경.
+		기억 영혼들 n절
+		=wn 
+		n:생명받은
+		t:눈
+		f: 콧물막히고 기관지 흐르니 기침
+		e:
+		w:
+		h;
+
+		6억년 전  지구
+		여섯 번째 버튼에 해당하는 내용입니다.</p></div>
       </td>
 
+	</pre>
       <!-- 중간 세로 구분선 -->
       <td style="width:5%; text-align:center;">
         ------------------------------------------------------------------------------------------------<div class="vertical-line"></div>
@@ -85,7 +95,6 @@ station over earth   future  image .<br>
       </td>
     </tr>
   </table>
-
   <script>
     function showText(num) {
       // 모든 텍스트 숨기기
