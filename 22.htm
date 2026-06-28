@@ -5,8 +5,45 @@
 <title>22day page</title>
 <script type="text/javascript" src="./me.js"></script>
 link rel="stylesheet" href='./me.css' />
+<style>
+body {
+     padding-left: 60px;
+       font-family: 'Malgun Gothic', sans-serif;
+  }
+#topLetter {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 80px; /* 더 크게 */
+    font-weight: bold;
+    user-select: none;
+    color: #0af;
+    z-index: 1000;
+    line-height: 1;
+  }
+
+
+
+</style>
 </head>
 <body onload="sayho()">
+<div id="topLetter"></div>
+
+<script>
+  const monthLetters = [
+    't', 'T', 'f', 'F', 'e', 'E',
+    'w', 'W', 'h', 'H', 'n', 'N'
+  ];
+
+  function showMonthLetter() {
+    const now = new Date();
+    const month = now.getMonth();
+    const letter = monthLetters[month];
+    document.getElementById('topLetter').textContent = letter;
+  }
+
+  showMonthLetter();
+</script>
 
 <script>        
 const colors = ["#FF0000", "#FFFF00", "#ADFF2F", "#0000FF", "#808080", "#800080", "#008000"];                              

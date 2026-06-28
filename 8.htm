@@ -1,12 +1,39 @@
+<!--
+날자 표시되야 하고 .내일 날씨여부 ?
+근무따른 턴별 모색분야 표시 되야 함.
+요일별  ; 레저  와 동행자.
+그리고 기본 턴별 관심분야.
+합치주 여부? FF WW :
+달별  이슈도 표시되면 좋고
+텍스트 입력 받아  근무별 달별 저장 기능 추가
 
+
+-->
 <htlm>
 <meta charset='utf-8'>
 <meta http-equiv='refresh' content='50000'/>
 	<title>left- 8work page</title>
 <script src="./me.js"></script>
-link rel="stylesheet" href='./me.css' />
+<link rel="stylesheet" href='./me.css' />
 <link rel="stylesheet" href='./bt.css' />
 <style>
+body {
+     padding-left: 60px;
+   
+    font-family: 'Malgun Gothic', sans-serif;
+  }
+
+#topLetter {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 80px; /* 더 크게 */
+    font-weight: bold;
+    user-select: none;
+    color: #0af;
+    z-index: 1000;
+    line-height: 1;
+  }
 
 div.header {
     padding: 3px 6px 3px 6px;
@@ -18,16 +45,45 @@ div.header {
   }
 </style>
 <body>
+
+
 <script>
+
 
     const colors = ["#FF0000", "#FFFF00", "#ADFF2F", "#0000FF", "#808080", "#800080", "#008000"];
     const today = new Date().getDay();
     document.body.style.backgroundColor = colors[today];
 </script>
 
+<div id="topLetter"></div>
+
+<script>
+  const monthLetters = [
+    't', 'T', 'f', 'F', 'e', 'E',
+    'w', 'W', 'h', 'H', 'n', 'N'
+  ];
+
+  function showMonthLetter() {
+    const now = new Date();
+    const month = now.getMonth();
+    const letter = monthLetters[month];
+    document.getElementById('topLetter').textContent = letter;
+  }
+
+  showMonthLetter();
+</script>
+
+<div  class="header">  head text
+<pre>
+this  text header  pre text
+</pre>
+</div>
+</br>
+
+<div class="fday">  skill  DAY::   빵.inventory.uld.bab. nap,</div>
+
 <div class="main">
 <input checked="checked" name="home" type="radio" value="/tohome.html" />
-<div class="fday">  skill DAY 빵 </div>
 <p id="content">
 T F  E  의 시간 .  4out  .  <br>.
 다음날 여부.<br> 
@@ -50,12 +106,7 @@ T F  E  의 시간 .  4out  .  <br>.
        <label for="html">aduino , git,  ccj-page.   8page,</label>
     </div>JavaScript
 </fieldset>
-<div  class="header">  head text
-<pre>
-this  text header  pre text
-and you?
-</pre>
-</div>
+</p>
 <video
 height="200" width="200" controls=""    preload="bbb"
 srclang="ko" label="korean" default="">

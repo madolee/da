@@ -6,8 +6,46 @@
   <meta http-equiv="refresh" content="5000"/>
   <script src="./me.js"></script>
   <link rel="stylesheet" href="./me.css" />
+<style>
+ body {
+     padding-left: 60px;
+   
+    font-family: 'Malgun Gothic', sans-serif;
+  }
+
+#topLetter {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 80px; /* 더 크게 */
+    font-weight: bold;
+    user-select: none;
+    color: #0af;
+    z-index: 1000;
+    line-height: 1;
+  }.
+</style>
 </head>
 <body>
+
+<div id="topLetter"></div>
+
+<script>
+  const monthLetters = [
+    't', 'T', 'f', 'F', 'e', 'E',
+    'w', 'W', 'h', 'H', 'n', 'N'
+  ];
+
+  function showMonthLetter() {
+    const now = new Date();
+    const month = now.getMonth();
+    const letter = monthLetters[month];
+    document.getElementById('topLetter').textContent = letter;
+  }
+
+  showMonthLetter();
+</script>
+
   jjlink to go each 6 page
   <table id="mainTable">
     <tr>

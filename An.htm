@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<link rel="stylesheet" href='./mm.css' />
+
+  <title>An-page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding:10px;
+    }
+    /* 버튼 영역 */
+    .button-bar {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid #999; /* 구분선 */
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .button-bar button {
+      margin: 0 8px;
+      padding: 8px 16px;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .button-bar button.active {
+      background-color: #4CAF50; /* 눌린 상태 색상 */
+      color: white;
+      transform: scale(1.05);   /* 강조 효과 */
+    }
+    </style>
+</head>
+<body>
+  <!-- 상단 버튼 영역 -->
+  <div class="button-bar">
+    <button onclick="showText(1)">n=che-n,e,w</button>
+    <button onclick="showText(2)">t=L-work connect </button>
+    <button onclick="showText(3)">f=J-work connect  </button>
+    <button onclick="showText(4)">e=y-work connect</button>
+    <button onclick="showText(5)">w</button>
+    <button onclick="showText(6)">h</button>
+  </div>
+
+  <!-- 내용 영역 -->
+<pre>
+  <div id="text1" class="text-block"><p>
+     = che - n;
+     = che - e;
+     = che - w;
+          	  
+	  </p></div>
+  <div id="text2" class="text-block"><p>
+오전의 2시간 * 8= 16시간 배정
+폰에서 오페라 ai 사용설정:
+퀀텀 컴퓨터의 기초;수퍼컴퓨터 2만년이 걸릴 계산을 했다 ?
+16시간의 배정을 어떻게 ?  양자 컴퓨터의 완전 이해를 도달하기 위해서 ,,,,
+비트 컴퓨터는 이해를 했는데,,, 협업으로 이루워지는 세계
+협업의 기초:이런것처럼 단절된 시간을 연결해서 결과를 도출하는 
+양자컴퓨터 시뮬레이터-오페라
+https://learn.microsoft.com/ko-kr/azure/quantum/backend-simulators
+
+pip install qiskit
+
+from qiskit import Aer, execute, QuantumCircuit
+
+# 양자 회로 생성
+qc = QuantumCircuit(2)
+qc.h(0)
+qc.cx(0, 1)
+
+# 시뮬레이터 백엔드 선택
+simulator = Aer.get_backend('qasm_simulator')
+
+# 회로 실행
+job = execute(qc, simulator, shots=1024)
+result = job.result()
+counts = result.get_counts(qc)
+print(counts)
+-------------------
+from qiskit import QuantumCircuit, Aer, execute
+
+# 2큐비트 양자 회로 생성
+qc = QuantumCircuit(2)
+
+# 첫 번째 큐비트에 Hadamard 게이트 적용 (중첩 상태 생성)
+qc.h(0)
+
+# 첫 번째 큐비트와 두 번째 큐비트에 CNOT 게이트 적용 (얽힘 생성)
+qc.cx(0, 1)
+
+# 측정 추가
+qc.measure_all()
+
+# 시뮬레이터 백엔드 선택
+simulator = Aer.get_backend('qasm_simulator')
+
+# 회로 실행
+job = execute(qc, simulator, shots=1024)
+result = job.result()
+
+# 결과 출력
+counts = result.get_counts(qc)
+print("Measurement results:", counts)
+0000
+설명
+harmad 게이트는 큐비트를 0과 1의 중첩 상태로 만듭니다.
+CNOT 게이트는 두 큐비트를 얽히게 만듭니다.
+측정 결과는 얽힘 상태의 확률 분포를 보여줍니다.
+<RightMouse>
+
+https://quantum.cloud.ibm.com/docs/en/guides/intro-to-patterns
+
+양자 게이트 이해하기
+X, Y, Z, H, S, T, CNOT 등 기본 게이트의 역할과 효과 학습
+Qiskit에서 게이트를 추가하고 조합하는 방법 익히기
+양자 알고리즘 실습
+Deutsch-Jozsa 알고리즘
+Grover 검색 알고리즘
+양자 텔레포테이션
+Qiskit 튜토리얼 활용
+Qiskit 공식 튜토리얼 사이트에서 단계별 예제 학습
+https://qiskit.org/documentation/tutorials.html
+4. 추가 팁
+Jupyter Notebook 환경에서 코드를 실행하면 시각적 결과 확인이 편리합니다.
+Qiskit 커뮤니티와 포럼에서 다양한 예제와 도움을 받을 수 있습니다.
+pip install notebook
+pip install jupyterlab
+jupyter lab
+Jupyter Notebook은 웹 기반 인터랙티브 개발 환경으로, Python 코드를 작성하고 실행하며 결과를 바로 확인할 수 있어 데이터 과학, 머신러닝, 양자 컴퓨팅 학습에 매우 적합합니다.
+
+
+
+
+두 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text3" class="text-block"><p>
+j-work time connect 야간:현장 
+첫날  8*3=24 둘째  4*3=12 세째  7*3=21( 서버 활용에 관해서)
+무중  1*6=6 ( 톰에 좋아요 누르고 음악 감상-우정을 쌓은 시간)
+
+세 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text4" class="text-block"><p>
+오후: 2*8=16시간
+무중  2*8=16시간
+양자 컴퓨터의 한국과 미국 중국 비교를 통해서 이해 하자 
+
+
+
+네 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text5" class="text-block"><p>
+휴무시간 배정 : 8*10=80시간
+ai네이버 기술이 뒤쳐졋는데 원인은 ? 
+
+다섯 번째 버튼에 해당하는 내용입니다.</p></div>
+  <div id="text6" class="text-block"><p>
+
+
+여섯 번째 버튼에 해당하는 내용입니다.</p></div>
+</pre>
+  <script>
+    function showText(num) {
+      // 모든 텍스트 숨기기
+      for (let i = 1; i <= 6; i++) {
+        const block = document.getElementById("text" + i);
+        if (block) block.style.display = "none";
+      }
+
+      // 모든 버튼에서 active 제거
+      document.querySelectorAll(".button-bar button").forEach(btn => btn.classList.remove("active"));
+
+      // 클릭한 버튼에 active 추가
+      event.target.classList.add("active");
+
+      // 선택한 텍스트만 보이기
+      const targetBlock = document.getElementById("text" + num);
+      if (targetBlock) targetBlock.style.display = "block";
+    }
+
+    // 페이지 로딩 시 첫 번째 버튼과 내용 표시
+    window.onload = function() {
+      const firstButton = document.querySelector(".button-bar button");
+      if (firstButton) {
+        firstButton.classList.add("active");
+      }
+      const firstBlock = document.getElementById("text1");
+      if (firstBlock) {
+        firstBlock.style.display = "block";
+      }
+    };
+  </script>
+  <pre>
+ android studio - work pl<br>
+--------N---- turn 
+띁어본거:미싱,시계,컴터,팔레트밑,낮은,안배우,망가진,찟어져,
+날아본,엔진,도르레,미적분,코싸인, 세토성,카드,마작,ufo,필리핀,
+카슈미르,중인국경,3일만부활,
+
+n:che -n,t,e,w h
+t:오전의 시간 connect
+f:야근의 시간 connect
+e:오후의 시간 connect
+w:휴일의 시간 connect
+h:
+
+명왕성 미생물.형태 생명체. 학습기능 있을지.
+종족보존 가능할지.단체문화 소멸 교육등 투쟁.계급 선전
+kimi 오픈소스 언어설치가능여부,수성1000온도,목성퀘도 타이레스.은하공전주기.
+24광년 이내 밝은 별 
+  </pre>	
+  <hr>
+</body>
+</html>
+

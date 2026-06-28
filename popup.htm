@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!--바탕화면 오늘색  -->
+<head>
+<script>
+function closeWin(thetime) {
+   setTimeout("window.close()", thetime);
+}
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업창</title>
+</head>
+<body bgcolor="#006666" text="#000000" leftmargin="0" topmargin="0" onLoad="closeWin('1800000')">
+this windows will close automactically
+<p>
+    <h2>pop content</h1>
+    <p>이것은 팝업창의 내용입니다.</p>
+<table><td>
+<video
+height="200" width="200" controls="2"    preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="./see4.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+</td>
+<button onclick="javascript:window.close()"> close </button><br>
+<button onclick="setTimeout(window.close, 300000)">close after 5 min</button>
+
+<td>
+<video
+height="200" width="200" controls="" loop="2"   preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="http://182.221.61.30/see1.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+</td>
+<td>
+<video
+height="200" width="200" controls   preload="bbb"
+srclang="ko" label="korean" default="">
+<source src="video4.mp4" type="video/mp4"
+<p>이 브라우저는 video를 재생할 수 없습니다.</p>
+</video>
+</td>
+<video src="snow.mp4" muted autoplay playsinline loop></video>
+</table>
+<audio src="http://182.221.61.30/ria.mp3" controls="" >
+http://182.221.61.30/see1.mp4
+
+
+</body>
+</html>

@@ -2,6 +2,9 @@
    margin: 0px 0px 0px 0px;
    padding: 0px 0px 0px 0px;
   }
+
+
+
   body, html {
   padding: 3px 3px 3px 3px;
   background-color: #BAFFFF;
@@ -55,6 +58,19 @@ word-spacing: 4px;
 line-height: 1.5;
 text-align :justify;
 }
+#topLetter {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 80px; /* 더 크게 */
+    font-weight: bold;
+    user-select: none;
+    color: #0af;
+    z-index: 1000;
+    line-height: 1;
+  }
+
+
 .conbo1{
 display: grid;
 grid-template-rows:80px auto 1fr auto 50px;

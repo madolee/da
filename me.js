@@ -1,3 +1,18 @@
+function showMonthLetter() {
+    const monthLetters = [
+        't', 'T', 'f', 'F', 'e', 'E',
+        'w', 'W', 'h', 'H', 'n', 'N'
+    ];
+    const now = new Date();
+    const month = now.getMonth();
+    const letter = monthLetters[month];
+    const element = document.getElementById('topLetter');
+    if (element) {
+        element.textContent = letter;
+    } else {
+        console.warn('Element with ID "topLetter" not found.');
+    }
+}
 
 
  function chtext() {
@@ -48,7 +63,7 @@ function sayHo() {
  // Use console.log to display results.
  console.log('Hello, ' + name + '!');
 }
-function num64();{
+function num64(){
 return Math.floor(Math,random()*64)+1;
 }
 

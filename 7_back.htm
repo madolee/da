@@ -1,130 +1,669 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-<script type="text/javascript" src="./mm.js"></script>
-
-  <title>버튼 클릭 시 텍스트 표시 (7개)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6탭 문서 편집기 - 수정</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    :root{
+      --bg:#f4f1ea;
+      --panel:#fbf8f2cc;
+      --panel-solid:#fbf8f2;
+      --ink:#1d1b19;
+      --muted:#6e665d;
+      --line:#d8d0c4;
+      --accent:#8c3d2b;
+      --accent-2:#d7a86e;
+      --accent-3:#2f5d50;
+      --shadow:0 20px 60px rgba(57, 39, 20, 0.10);
+      --radius:22px;
+      --tab-h:28px; /* 탭 높이 50%로 감소 (기존 56px → 28px) */
     }
-    td {
-      vertical-align: top;
-      padding: 10px;
-      border: 1px solid #ccc;
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:"Noto Sans KR", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(215,168,110,.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(47,93,80,.12), transparent 24%),
+        linear-gradient(180deg, #f7f4ee 0%, #efe9de 100%);
+      min-height:100vh;
+      overflow-x:hidden;
     }
-    button {
-      display: block;
-      margin: 5px 0;
-      width: 100px;
+
+    .app{
+      width:min(1440px, calc(100% - 32px));
+      margin:24px auto;
+      display:grid;
+      grid-template-columns: 280px minmax(0,1fr);
+      gap:18px;
+      align-items:start;
     }
-    p {
-      display: none; /* 기본적으로 숨김 */
-      margin: 10px 0;
+
+    .sidebar,
+    .workspace{
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.45);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
     }
-    pre{
-	    background-color:#f0f0f0;
-	    padding:5px;
+
+    .sidebar{
+      padding:12px;
+      position:sticky;
+      top:24px;
+      min-height:calc(100vh - 48px);
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      animation:rise .7s ease both;
+    }
+
+    /* 상단 안내와 하단 안내를 제거했으므로 사이드바는 간결합니다 */
+
+    .workspace{
+      padding:18px;
+      animation:rise .8s ease .08s both;
+    }
+
+    .topbar{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:16px;
+      align-items:center;
+      margin-bottom:14px;
+    }
+
+    .doc-title-wrap{
+      display:flex;
+      align-items:end;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .doc-title{
+      margin:0;
+      font-family:"Space Grotesk", sans-serif;
+      font-size:clamp(1.05rem, 1.82vw, 1.75rem);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .status{
+      color:var(--muted);
+      font-size:.64rem;
+      padding-bottom:4px;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    button{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      font:inherit;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .btn{
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:.7rem;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.6);
+      color:var(--ink);
+      box-shadow:0 8px 24px rgba(0,0,0,.05);
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg, var(--accent), #a94c34);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .btn.secondary{
+      background:linear-gradient(135deg, var(--accent-3), #3d7868);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .editor-shell{
+      border:1px solid var(--line);
+      border-radius:26px;
+      overflow:hidden;
+      background:var(--panel-solid);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+    }
+
+    .tabs{
+      display:grid;
+      grid-template-columns:repeat(6, minmax(80px, 1fr));
+      gap:0;
+      border-bottom:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.75), rgba(246,240,230,.85));
+      overflow:auto hidden;
+      scrollbar-width:thin;
+    }
+
+    .tab{
+      position:relative;
+      min-height:var(--tab-h);
+      padding:0 12px;
+      border-right:1px solid var(--line);
+      background:transparent;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      color:var(--muted);
+      white-space:nowrap;
+      flex:0 0 auto;
+      font-size:.78rem;
+    }
+
+    .tab:last-child{border-right:none}
+
+    .tab span{
+      font-family:"Space Grotesk", sans-serif;
+      font-weight:700;
+      letter-spacing:-.02em;
+      font-size:.7rem;
+    }
+
+    .tab small{
+      font-size:.55rem;
+      opacity:.7;
+    }
+
+    .tab::after{
+      content:"";
+      position:absolute;
+      left:12px;
+      right:12px;
+      bottom:6px;
+      height:3px;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius:999px;
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .25s ease;
+    }
+
+    .tab:hover{
+      background:rgba(255,255,255,.45);
+      color:var(--ink);
+    }
+
+    .tab.active{
+      background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.35));
+      color:var(--ink);
+    }
+
+    .tab.active::after{ transform:scaleX(1); }
+
+    .toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      padding:10px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+
+    .tool-group{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      padding-right:8px;
+      margin-right:2px;
+      border-right:1px dashed var(--line);
+      align-items:center;
+    }
+
+    .tool-group:last-child{
+      border-right:none;
+      padding-right:0;
+    }
+
+    /* 툴 아이콘 크기 50% 축소 */
+    .tool{
+      min-width:21px; /* 기존 42px의 절반 */
+      height:21px;    /* 기존 42px의 절반 */
+      border-radius:7px;
+      border:1px solid var(--line);
+      background:#fff9;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--ink);
+      font-weight:700;
+      font-size:.35rem; /* 기존 .7rem의 절반 */
+      padding:0;
+    }
+
+    .tool:hover{
+      background:#fff;
+      transform:translateY(-1px);
+    }
+
+    .tool.active{
+      background:var(--ink);
+      color:#fff;
+      border-color:var(--ink);
+    }
+
+    .editor-area{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 260px;
+      min-height:68vh;
+    }
+
+    .paper-wrap{
+      padding:26px;
+      background:
+        linear-gradient(180deg, rgba(251,248,242,1) 0%, rgba(247,243,236,1) 100%);
+    }
+
+    .paper{
+      min-height:100%;
+      border:1px solid #e6ddd0;
+      border-radius:24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.95), rgba(252,249,244,.95));
+      box-shadow:
+        0 24px 50px rgba(66, 45, 23, .08),
+        inset 0 1px 0 rgba(255,255,255,.85);
+      padding:clamp(22px, 3vw, 46px);
+      outline:none;
+      line-height:1.9;
+      font-size:.9rem;
+    }
+
+    .paper:focus{
+      box-shadow:
+        0 24px 50px rgba(66, 45, 23, .08),
+        0 0 0 3px rgba(140,61,43,.15),
+        inset 0 1px 0 rgba(255,255,255,.85);
+    }
+
+    .paper h2,
+    .paper h3{
+      font-family:"Space Grotesk", sans-serif;
+      letter-spacing:-.03em;
+      margin-top:0;
+      font-size:1.05rem;
+    }
+
+    .paper[data-placeholder]:empty::before{
+      content:attr(data-placeholder);
+      color:#9b9287;
+    }
+
+    .sidepanel{
+      border-left:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(250,246,239,.95), rgba(244,238,229,.95));
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .panel-block{
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.48);
+    }
+
+    .panel-block h3{
+      margin:0 0 10px;
+      font-family:"Space Grotesk", sans-serif;
+      font-size:.9rem;
+      letter-spacing:-.02em;
+    }
+
+    .panel-block p,
+    .panel-block li{
+      margin:0;
+      color:var(--muted);
+      font-size:.86rem;
+      line-height:1.6;
+    }
+
+    .outline{
+      padding-left:18px;
+      display:grid;
+      gap:8px;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @keyframes rise{
+      from{opacity:0;transform:translateY(24px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @media (max-width: 1100px){
+      .app{
+        grid-template-columns:1fr;
+      }
+      .sidebar{
+        position:relative;
+        top:auto;
+        min-height:auto;
+      }
+      .editor-area{
+        grid-template-columns:1fr;
+      }
+      .sidepanel{
+        border-left:none;
+        border-top:1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 760px){
+      .workspace{padding:12px}
+      .topbar{
+        grid-template-columns:1fr;
+      }
+      .actions{
+        justify-content:flex-start;
+      }
+      .tabs{
+        grid-template-columns:repeat(6, 140px);
+      }
+      .paper-wrap{padding:14px}
+      .toolbar{padding:8px}
+      .tool{
+        min-width:18px;
+        height:18px;
+        border-radius:6px;
+        font-size:.32rem;
+      }
     }
   </style>
 </head>
-<body  onload="daysak()">
-  <table>
-    <tr>
-      <!-- 좌측 버튼 영역 -->
-      <td>
-        <button onclick="showText(1)">버튼 1</button>
-        <button onclick="showText(2)">버튼 2</button>
-        <button onclick="showText(3)">버튼 3</button>
-        <button onclick="showText(4)">버튼 4</button>
-        <button onclick="showText(5)">버튼 5</button>
-        <button onclick="showText(6)">버튼 6</button>
-        <button onclick="showText(7)">버튼 7</button>
-      </td>
+<body>
+  <div class="app">
+    <!-- 사이드바: 안내문 제거하여 간결하게 비워둠 -->
+    <aside class="sidebar reveal" aria-hidden="true"></aside>
 
-      <!-- 우측 텍스트 영역 -->
-      <td>
-        <p id="text1">버튼 1을 눌렀을 때 보이는 텍스트입니다.
-<pre>	
-12월
+    <main class="workspace reveal">
+      <div class="topbar">
+        <div class="doc-title-wrap">
+          <h2 class="doc-title">멀티 탭 에디터</h2>
+          <div class="status" id="wordCount">0자 · 0단어</div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="renameTabBtn">탭 이름 변경</button>
+          <button class="btn secondary" id="downloadBtn">현재 탭 다운로드</button>
+          <button class="btn primary" id="saveBtn">전체 저장</button>
+        </div>
+      </div>
 
-insert
-NJ=MARA?/
-TL=MAC.KEY.WORK.SUSHI.HOME.SOPRANO.INVITE
-FL=SLEEP.&   EU=SLEEP& ST.next J-work   WJ=B WORK:제육 냠냠(정우종)
-HY:clasic piano&apple  play효연
-NJ:print&send?:4out   /with TOM-순디국.멍.버킹.-한의 숨은실력자
-TU:mac2th.brazil kill. sushi? walk sleep. meat. bench.25day:notACD(KFC.TOM.롯백.작컵술)
-*FJ:5C시작.빵숨김.추운옆방.금주.13PLAN.
-EY:나.맥.사과.빵.PIANO.일찍출고.2task.
-WY:5CE=또맥.원종맥-저녁비.
-HL:동방의정수는?맥&쇼핑.바칼.new_PASS.회밥X.아세안중H
-(필핀.인니.미얀.벳남.태국.라오스.캄보.말레이.동티.싱가,브루나이.호주.파루아.뉴질랜드.하와이)
-NL:last work.5/6MUSIC.nextACD.bag.
-after:bag.8-home 14-NNU:마라&ACD.역.with-TOM.버킹멍. 
-다음날Y
+      <section class="editor-shell">
+        <nav class="tabs" aria-label="문서 탭">
+          <button class="tab active" data-tab="0"><span>문서 1</span><small>01</small></button>
+          <button class="tab" data-tab="1"><span>문서 2</span><small>02</small></button>
+          <button class="tab" data-tab="2"><span>문서 3</span><small>03</small></button>
+          <button class="tab" data-tab="3"><span>문서 4</span><small>04</small></button>
+          <button class="tab" data-tab="4"><span>문서 5</span><small>05</small></button>
+          <button class="tab" data-tab="5"><span>문서 6</span><small>06</small></button>
+        </nav>
 
---
-11월:집과무난무사:동생들배려:5천연봉자
-구미결혼식0:내년비 플랜0:(전반16진행중2틀휴가가포함된):1회마라주획득:
-군대모임예정.후반10/5진행예정-지구공전시대.태양공전시대.
-12월:5-10-유툽.숩.업빛단절.11-31근무향동만.유툽단절 31일까지 연장하고.
-새로운 일표현발견 8일오후=FY. YT,F.E.W.H순으로 진행 -특징날자에순서없음
-EE때만고량주.CN cutday적용.목본합치tfewhn.1T 1F=오띠의 시작으로 정함
-13개의 오띠달어찌보냄?
-27년까지삶. 28-2/4목턴 어찌 보낼?옷이날개인데,,1목턴은 어찌맞이하고?
-어떤 변화들이 기다릴지(신체.사회.습관.일상.관계.재정)
-  
-시먹.서비손끝귀일fw향동감사찾입미소담표큰다발기본걷짭멍띵아슬.곡기상하온화.뽕짝.올열매눈감.묵주
-기달=큰동허기취침뚫림.리듬맨
-10.3:서울시민이엇던;오후3일연속 오전2틀또오후다음 야근 2틀=수난의 주간.N T -ROUND.해변가 수초캐먹고.멀리 걸어서통학.늦잠.떠돌이아이.H달과 관련된 문화적 결핍?기술없음? 시절? 나는 찾앗어야 햇고 적용햇어야 햇는데. 다리 부러지고.환타지적.N그렇게 땔깜모으러 다닌.땅없던.
-KAS-65년부터 퇴직/HHH=2은하인식과 태양공전인식=서구집중시대 종료 ?
-TFE:TFday.E 시간= 순열 순차-
-FE=서울시민지위상징.서울식 뷔페탐방?.기업카드20만.국민카드15만캐시백.전화해확인해야
-2틀간휴일,,쉬고오전.FT,F사진찍고.옷교체.현대버거.치킨?4년간의대체집중할거.
-아프리카 음악.위호산술.맥날.삼겹?.닭찜?.N:어려웟던F절.톰3일간.노전의 휴일?.배낭.
-야근까지23일7일간=11.12마무리구상/31일까지(전송.출력)
-2틀(15.16)=급여구상.(부천수도권통신주관기관)
-2001년의 1년간 방황. 2002년도 취직햇으니.그땐 왠지편함.적은 방세 출근하면 많은 사람들 보고 일도 안힘들고  사회속에서 컴터 직업 그만두고 순전독립한..오늘 내일 그때의 느낌으로근무
-WN+N=64.사띠.82.00년.19년도.10월말.
+        <div class="toolbar" aria-label="서식 도구">
+          <div class="tool-group">
+            <button class="tool" data-command="bold" title="굵게"><strong>B</strong></button>
+            <button class="tool" data-command="italic" title="기울임"><em>I</em></button>
+            <button class="tool" data-command="underline" title="밑줄"><u>U</u></button>
+          </div>
+          <div class="tool-group">
+            <button class="tool" data-command="formatBlock" data-value="h2" title="제목">H2</button>
+            <button class="tool" data-command="formatBlock" data-value="blockquote" title="인용">❝</button>
+            <button class="tool" data-command="removeFormat" title="서식 제거">⨯</button>
+          </div>
+          <div class="tool-group">
+            <button class="tool" data-command="insertUnorderedList" title="목록">•</button>
+            <button class="tool" data-command="insertOrderedList" title="번호">1.</button>
+            <button class="tool" data-command="justifyLeft" title="왼쪽">≡</button>
+            <button class="tool" data-command="justifyCenter" title="가운데">≣</button>
+          </div>
+        </div>
 
+        <div class="editor-area">
+          <div class="paper-wrap">
+            <article
+              id="editor"
+              class="paper"
+              contenteditable="true"
+              spellcheck="false"
+              data-placeholder="여기에 문서를 입력하세요. 탭마다 별도의 내용이 저장됩니다."
+              aria-label="문서 편집 영역"
+            ></article>
+          </div>
 
-*/
+          <aside class="sidepanel">
+            <section class="panel-block">
+              <h3>문서 안내</h3>
+              <p>상단의 6개 탭을 클릭하면 각 문서를 전환할 수 있습니다. 각 탭은 독립적으로 저장되며 제목도 개별 변경 가능합니다.</p>
+            </section>
 
-/** @OnlyCurrentDoc 
-9.3일.오늘13.2task.내일13.모래2틀 휴일인데,전기고지서.진단.회덮밥.톰.오전맥모닝3일. 
-다음3+2틀 근무를 위한 멍(남부광장).달구경.안식과지혜.낮잠2틀.교류는?.아시아대륙의 기술(NWH).
-9.7:^ 2task물.ㅌㅈㅇ.ㄱ^=1ㅇ-h 바다생명체.ㅈ=하부이동수단.ㅇ=항상인류.ㅁ퇴근톰.
-어제 ㅁ날규정?ㄱㄱ=금성날.
-엮어야 되는데..아무거나 엮어라
-내일월오전비.오침(밥.사발면)=(역광장.2멍.9시집뚝불고기)
-ㅋㅋ 오전근무:h달관련기구(사람-행정부).:H달:대상
-9/22:EWH 오후: 내일.모래.글피 오후:다음 휴일. 4일만의 휴일인데:포도먹고.2task2장 수령. 전송준비.내일바쁜오휴:pda 휴대.일괄출.WF일때끝.다음10월준비.EH일(균형잇어보임)
-9/27.2+2(야).1휴.9일연속ㅠ.특히나명절.18년간이레,1일멍중요.하루하루가 천국처럼
-</pre>	
-</p>
-        <p id="text2">버튼 2를 눌렀을 때 보이는 텍스트입니다.</p>
-        <p id="text3">버튼 3을 눌렀을 때 보이는 텍스트입니다.</p>
-        <p id="text4">버튼 4를 눌렀을 때 보이는 텍스트입니다.</p>
-        <p id="text5">버튼 5를 눌렀을 때 보이는 텍스트입니다.</p>
-        <p id="text6">버튼 6을 눌렀을 때 보이는 텍스트입니다.</p>
-        <p id="text7">버튼 7을 눌렀을 때 보이는 텍스트입니다.</p>
-      </td>
-    </tr>
-  </table>
+            <section class="panel-block">
+              <h3>빠른 구조</h3>
+              <ul class="outline">
+                <li>제목 입력</li>
+                <li>본문 작성</li>
+                <li>목록/강조 추가</li>
+                <li>탭별 저장</li>
+              </ul>
+            </section>
+
+            <section class="panel-block">
+              <h3>사용 팁</h3>
+              <p>Ctrl/Cmd + B, I, U 단축키도 브라우저 기본 편집 기능과 함께 사용할 수 있습니다. “현재 탭 다운로드”로 HTML 파일로 저장할 수 있습니다.</p>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script>
-    function showText(num) {
-      // 모든 텍스트 숨기기
-      for (let i = 1; i <= 7; i++) {
-        document.getElementById("text" + i).style.display = "none";
+    const STORAGE_KEY = 'six-tab-editor-data-v1';
+
+    const defaultDocs = [
+      { title: '문서 1', content: '<h2>문서 1</h2><p>첫 번째 탭의 내용을 작성해보세요.</p>' },
+      { title: '문서 2', content: '<h2>문서 2</h2><p>회의록, 초안, 아이디어 정리에 적합합니다.</p>' },
+      { title: '문서 3', content: '<h2>문서 3</h2><p>탭마다 독립적인 문서를 관리할 수 있습니다.</p>' },
+      { title: '문서 4', content: '<h2>문서 4</h2><p>필요한 내용을 자유롭게 편집하세요.</p>' },
+      { title: '문서 5', content: '<h2>문서 5</h2><p>브라우저 로컬 저장으로 유지됩니다.</p>' },
+      { title: '문서 6', content: '<h2>문서 6</h2><p>다운로드 기능으로 현재 문서를 저장할 수 있습니다.</p>' }
+    ];
+
+    let docs = loadDocs();
+    let activeTab = 0;
+
+    const tabs = [...document.querySelectorAll('.tab')];
+    const editor = document.getElementById('editor');
+    const saveBtn = document.getElementById('saveBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const renameTabBtn = document.getElementById('renameTabBtn');
+    const wordCount = document.getElementById('wordCount');
+
+    // 선택적 요소(사이드바에 제거된 요소들)는 null일 수 있으므로 안전하게 참조합니다.
+    const currentTabLabelEl = document.getElementById('currentTabLabel');
+    const saveStateEl = document.getElementById('saveState');
+
+    function loadDocs(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return structuredClone(defaultDocs);
+        const parsed = JSON.parse(raw);
+        if(Array.isArray(parsed) && parsed.length === 6) return parsed;
+        return structuredClone(defaultDocs);
+      }catch(e){
+        return structuredClone(defaultDocs);
       }
-      // 선택한 텍스트만 보이기
-      document.getElementById("text" + num).style.display = "block";
     }
+
+    function persistDocs(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(docs));
+      if(saveStateEl) {
+        saveStateEl.textContent = '저장 완료';
+        clearTimeout(persistDocs._timer);
+        persistDocs._timer = setTimeout(() => {
+          saveStateEl.textContent = '편집 가능';
+        }, 1400);
+      }
+    }
+
+    function renderTabs(){
+      tabs.forEach((tab, index) => {
+        tab.classList.toggle('active', index === activeTab);
+        const span = tab.querySelector('span');
+        span.textContent = docs[index].title || `문서 ${index + 1}`;
+      });
+      if(currentTabLabelEl) {
+        currentTabLabelEl.textContent = docs[activeTab].title || `문서 ${activeTab + 1}`;
+      }
+    }
+
+    function renderEditor(){
+      editor.innerHTML = docs[activeTab].content || '';
+      renderTabs();
+      updateCount();
+    }
+
+    function saveCurrentEditorToState(){
+      docs[activeTab].content = editor.innerHTML;
+      if(saveStateEl) saveStateEl.textContent = '저장 대기 중';
+    }
+
+    function switchTab(index){
+      saveCurrentEditorToState();
+      persistDocs();
+      activeTab = index;
+      renderEditor();
+      editor.focus();
+      placeCaretAtEnd(editor);
+    }
+
+    function updateCount(){
+      const text = editor.innerText.trim();
+      const chars = text.length;
+      const words = text ? text.split(/\s+/).length : 0;
+      if(wordCount) wordCount.textContent = `${chars}자 · ${words}단어`;
+    }
+
+    function placeCaretAtEnd(el){
+      const range = document.createRange();
+      const sel = window.getSelection();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => switchTab(Number(tab.dataset.tab)));
+    });
+
+    editor.addEventListener('input', () => {
+      saveCurrentEditorToState();
+      updateCount();
+      clearTimeout(editor._autosave);
+      editor._autosave = setTimeout(() => {
+        persistDocs();
+      }, 500);
+    });
+
+    saveBtn.addEventListener('click', () => {
+      saveCurrentEditorToState();
+      persistDocs();
+    });
+
+    renameTabBtn.addEventListener('click', () => {
+      const current = docs[activeTab].title || `문서 ${activeTab + 1}`;
+      const next = prompt('현재 탭 이름을 입력하세요.', current);
+      if(next !== null){
+        const cleaned = next.trim() || `문서 ${activeTab + 1}`;
+        docs[activeTab].title = cleaned;
+        renderTabs();
+        persistDocs();
+      }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      saveCurrentEditorToState();
+      const title = docs[activeTab].title || `document-${activeTab + 1}`;
+      const html = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>${title}</title>
+</head>
+<body>
+${docs[activeTab].content}
+</body>
+</html>`;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${title.replace(/[\\/:*?"<>|]/g, '_')}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    const toolButtons = [...document.querySelectorAll('.tool')];
+    toolButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const command = btn.dataset.command;
+        const value = btn.dataset.value || null;
+        editor.focus();
+        document.execCommand(command, false, value);
+        saveCurrentEditorToState();
+        updateCount();
+        persistDocs();
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    renderEditor();
   </script>
 </body>
 </html>
-
